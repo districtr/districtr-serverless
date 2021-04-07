@@ -25,12 +25,15 @@ def block_assignment_from_units(assignment, unit_to_block_mapping):
 
 def lambda_handler(event, context):
     # TODO implement
+    
+    if 'body' in event.keys():
+        event = json.loads(event["body"])
     bucket = "districtr"
     state = event["state"].lower().replace(" ", "_")
-    units = event["units"]
+    units = event["units"].lower().replace(" ", "")
     assignment = event["assignment"]
     key = "block_assign/{}_{}.json".format(state, units)
-    
+
     try:
         data = s3.get_object(Bucket=bucket, Key=key)
         state_mapping = json.load(data['Body'])
