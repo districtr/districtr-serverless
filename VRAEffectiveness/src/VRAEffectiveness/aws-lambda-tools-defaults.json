@@ -13,5 +13,5 @@
   "function-memory-size": 256,
   "function-timeout": 30,
   "function-role": "lambda",
-  "function-handler": "VRAEffectiveness::VRAEffectiveness.Function::FunctionHandler"
+  "function-handler": "VRAEffectiveness::VRAEffectivenessLambda.Function::FunctionHandler"
 }

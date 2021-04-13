@@ -14,14 +14,18 @@
     <Content Include="aws-lambda-tools-defaults.json" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="Amazon.Lambda.APIGatewayEvents" Version="2.4.0" />
     <PackageReference Include="Amazon.Lambda.Core" Version="1.2.0" />
     <PackageReference Include="Amazon.Lambda.Serialization.SystemTextJson" Version="2.1.0" />
     <PackageReference Include="Deedle" Version="2.3.0" />
     <PackageReference Include="FSharp.Data" Version="4.0.1" />
     <PackageReference Include="MathNet.Numerics" Version="4.15.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="aws-lambda-tools-defaults.json" />
-    <None Include="Readme.md" />
+    <Content Include="aws-lambda-tools-defaults.json" CopyToOutputDirectory="PreserveNewest" />
+    <None Include="resources/texas.json" CopyToOutputDirectory="PreserveNewest" />
+    <None Include="resources/texas.csv" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="Readme.md" />
   </ItemGroup>
 </Project>
