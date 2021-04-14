@@ -26,6 +26,8 @@
     <Content Include="aws-lambda-tools-defaults.json" CopyToOutputDirectory="PreserveNewest" />
     <None Include="resources/texas.json" CopyToOutputDirectory="PreserveNewest" />
     <None Include="resources/texas.csv" CopyToOutputDirectory="PreserveNewest" />
+    <None Include="resources/louisiana.json" CopyToOutputDirectory="PreserveNewest" />
+    <None Include="resources/louisiana.csv" CopyToOutputDirectory="PreserveNewest" />
     <Content Include="Readme.md" />
   </ItemGroup>
 </Project>

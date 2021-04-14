@@ -113,7 +113,7 @@ type ElectionDetails =
         CoC: Column
         CoCPerc: float
         CoCPlace: int
-        FirstPlace: Column
+        FirstPlacePerc: float
         NumCands: int
         ExistsRunoff: bool
         CoCRO: Column
@@ -230,7 +230,7 @@ let DistrictElectionDetails ((name, minCol, totCol): Minority.Minority) (distric
     let PrimaryVoteShares = election.Primary.VoteShares district |> Series.sortBy (fun v -> - v)
     let CoCShare = PrimaryVoteShares.[CoC]
     let CoCPlace = PrimaryVoteShares |> Series.filterValues (fun x -> x >= CoCShare) |> Series.countKeys
-    let firstPlace = PrimaryVoteShares.GetKeyAt 0
+    let firstPlace = PrimaryVoteShares.GetAt 0
     let numberOfCands = PrimaryVoteShares.KeyCount
 
     let ExistsRunoff, CoCRO, CoCROShare = match election.RunoffCoC, election.Runoff with
@@ -240,7 +240,7 @@ let DistrictElectionDetails ((name, minCol, totCol): Minority.Minority) (distric
                                           | Some cand, Some e -> true, cand.[name], e.VoteShares district |> Series.get cand.[name]
                                           | _ -> false, "", 0.
     
-    {Name=ElectName; CoC=CoC; CoCPerc=CoCShare; CoCPlace=CoCPlace; FirstPlace=firstPlace;NumCands=numberOfCands;
+    {Name=ElectName; CoC=CoC; CoCPerc=CoCShare; CoCPlace=CoCPlace; FirstPlacePerc=firstPlace; NumCands=numberOfCands;
      ExistsRunoff=ExistsRunoff; CoCRO=CoCRO; CoCPercRO=CoCROShare;
      ExistsGen=ExistsGen; CoCGen=CoCGen;CoCPercGen=CoCGenShare}
 
@@ -296,7 +296,8 @@ let PlanVRAEffectiveness planData (districtCol: Column) (minorities: (Minority.M
 
 
 /// <summary>
-/// 
+/// VRA Effectiveness Score and election details for each district in the plan across all of the passed
+/// minority groups.
 /// </summary>
 /// <param name="planData"> Frame containing precinct data and column representing district </param>
 /// <param name="districtCol"> The Column containing district id. </param>
