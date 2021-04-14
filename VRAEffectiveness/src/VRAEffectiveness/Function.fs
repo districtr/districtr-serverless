@@ -13,7 +13,11 @@ open Newtonsoft.Json
 [<assembly: LambdaSerializer(typeof<Amazon.Lambda.Serialization.SystemTextJson.DefaultLambdaJsonSerializer>)>]
 ()
 
-
+type Response = 
+    {
+        Data: PlanVRASummary<int>
+        SeqID: int
+    }
 
 type Function() =
     let (+/) path path' = System.IO.Path.Combine(path, path')
@@ -34,6 +38,7 @@ type Function() =
         let request = JsonValue.Parse(input.Body)
         let stateName = request.["state"].AsString().ToLower().Replace(" ", "_")
         let PrecinctID = request.["precID"].AsString()
+        let requestID = request.["SeqID"].AsInteger()
         let districtID = "District"
         let assignment = request.["assignment"].Properties() |> Array.map (fun (a,b) -> a,b.AsInteger())
 
@@ -51,4 +56,4 @@ type Function() =
         
         let vrascores: PlanVRASummary<int> = PlanVRAEffectivenessDetailed PlanData districtID Minorities Elections CoCSuccess
         
-        JsonConvert.SerializeObject vrascores
+        JsonConvert.SerializeObject {SeqID = requestID; Data=vrascores}
