@@ -1,0 +1,116 @@
+{
+    "tot_cvap_col": "CVAP",
+    "minorities": {
+        "Black": {
+            "cvap_col": "BCVAP",
+            "logit_params": {"coef": 6.353083092800907, "intercept": -2.4095124801524066}
+        }
+    },
+    "election_groups": [
+        {
+            "name": "GOV15",
+            "score": {"Black": 1},
+            "primary_cands": ["DeatonD_15P_Governor","EdwardsD_15P_Governor","SimpsonD_15P_Governor",
+                              "AngelleR_15P_Governor","DardenneR_15P_Governor","VitterR_15P_Governor",
+                              "BilliotU_15P_Governor","OdomU_15P_Governor","OrgeronU_15P_Governor"],
+            "primary_coc": {"Black": "EdwardsD_15P_Governor"},
+            "runoff_cands": null,
+            "runoff_coc": null,
+            "general_cands": ["EdwardsD_15G_Governor","VitterR_15G_Governor"],
+            "general_coc":{"Black": "EdwardsD_15G_Governor"}
+        },
+        {
+            "name": "SOS15",
+            "score": {"Black": 1},
+            "primary_cands": ["SchedlerR_15P_SOS","TysonD_15P_SOS"],
+            "primary_coc": {"Black": "TysonD_15P_SOS"},
+            "runoff_cands": null,
+            "runoff_coc": null,
+            "general_cands": null,
+            "general_coc": null
+        },
+        {
+            "name": "PRES16",
+            "score": {"Black": 1},
+            "primary_cands": ["BurkeD_16P_President","ClintonD_16P_President","FuenteD_16P_President",
+                              "HewesD_16P_President","JuddD_16P_President","OMalleyD_16P_President",
+                              "SandersD_16P_President","SteinbergD_16P_President","WilsonD_16P_President",
+                              "WolfeD_16P_President"],
+            "primary_coc": {"Black": "ClintonD_16P_President"},
+            "runoff_cands": null,
+            "runoff_coc": null,
+            "general_cands": ["TrumpR_16G_President","ClintonD_16G_President"],
+            "general_coc":{"Black": "ClintonD_16G_President"}
+        },
+        {
+            "name": "SEN16",
+            "score": {"Black": 1},
+            "primary_cands": [],
+            "primary_coc": {"Black": "CampbellD_16P_US_Sen"},
+            "runoff_cands": null,
+            "runoff_coc": null,
+            "general_cands": ["CampbellD_16G_US_Sen","KennedyR_16G_US_Sen"],
+            "general_coc":{"Black": "CampbellD_16G_US_Sen"}
+        },
+        {
+            "name": "TRES17",
+            "score": {"Black": 1},
+            "primary_cands": [],
+            "primary_coc": {"Black": "EdwardsD_17P_Treasurer"},
+            "runoff_cands": null,
+            "runoff_coc": null,
+            "general_cands": [],
+            "general_coc":{"Black": "EdwardsD_17G_Treasurer"}
+        },
+        {
+            "name": "SOS18",
+            "score": {"Black": 1},
+            "primary_cands": [],
+            "primary_coc": {"Black": "GreenupD_18P_SOS"},
+            "runoff_cands": null,
+            "runoff_coc": null,
+            "general_cands": [],
+            "general_coc":{"Black": "GreenupD_18G_SOS"}
+        },
+        {
+            "name": "TRES19",
+            "score": {"Black": 1},
+            "primary_cands": [],
+            "primary_coc": {"Black": "EdwardsD_19P_Treasurer"},
+            "runoff_cands": null,
+            "runoff_coc": null,
+            "general_cands": null,
+            "general_coc": null
+        },
+        {
+            "name": "GOV19",
+            "score": {"Black": 1},
+            "primary_cands": [],
+            "primary_coc": {"Black": "EdwardsD_19P_Governor"},
+            "runoff_cands": null,
+            "runoff_coc": null,
+            "general_cands": [],
+            "general_coc":{"Black": "EdwardsD_19G_Governor"}
+        },
+        {
+            "name": "AGC19",
+            "score": {"Black": 1},
+            "primary_cands": [],
+            "primary_coc": {"Black": "GreenD_19P_Ag_Comm"},
+            "runoff_cands": null,
+            "runoff_coc": null,
+            "general_cands": null,
+            "general_coc": null
+        },
+        {
+            "name": "LTG19",
+            "score": {"Black": 1},
+            "primary_cands": [],
+            "primary_coc": {"Black": "JonesD_19P_Lt_Governor"},
+            "runoff_cands": null,
+            "runoff_coc": null,
+            "general_cands": null,
+            "general_coc": null
+        }
+    ]
+}

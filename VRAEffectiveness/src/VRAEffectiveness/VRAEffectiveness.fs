@@ -109,7 +109,7 @@ type PlanVRAScores<'a when 'a : comparison > = Map<Minority.Name, Map<'a, float>
 
 type ElectionDetails = 
     {
-        Name: Minority.Name
+        Name: string
         CoC: Column
         CoCPerc: float
         CoCPlace: int
@@ -145,8 +145,8 @@ type SuccessFunction<'a when 'a : equality> =  District<'a> -> Minority.Name -> 
 /// </summary>
 /// <param name="district"></param> Frame where each row is a precinct within the district and contains
 /// candidate columns.
-/// <param name="minority"></param>
-/// <param name="election"></param>
+/// <param name="minority"> The minority group to calculate CoC success for </param>
+/// <param name="election"> The election group to calculate success for </param>
 /// <typeparam name="'a">The type of the Precinct Key index.   Should be string or int</typeparam>
 /// <returns> 1. if the CoC was successful and 0. otherwise.</returns>
 let CoCCarriesElectLA (district: District<'a>) (minority: Minority.Name) (election: ElectionGroup) = 
@@ -171,9 +171,10 @@ let CoCCarriesElectLA (district: District<'a>) (minority: Minority.Name) (electi
 /// <summary>
 ///     Represents Success of a candidate of choice in TX with respect to the passed election group
 /// </summary>
-/// <param name="district"></param>
-/// <param name="minority"></param>
-/// <param name="election"></param>
+/// <param name="district"></param> Frame where each row is a precinct within the district and contains
+/// candidate columns.
+/// <param name="minority"> The minority group to calculate CoC success for </param>
+/// <param name="election"> The election group to calculate success for </param>
 /// <typeparam name="'a">The type of the Precinct Key index.   Should be string or int</typeparam>
 /// <returns> 1. if the CoC was successful and 0. otherwise.</returns>
 let CoCCarriesElectTX (district: District<'a>) (minority: Minority.Name) (election: ElectionGroup) = 
@@ -251,8 +252,8 @@ let DistrictElectionDetails ((name, minCol, totCol): Minority.Minority) (distric
 /// <param name="elections">The array of election groups to consider</param> 
 /// <param name="successFunc">How success in an election group is defined for the CoC</param> 
 /// <param name="logitParams"> The parameters for the logit function adjustment, if any. </param>
-/// <param name="districtData">DataFrame representing CVAP and Candidate results by precinct for the 
-/// district</param>
+/// <param name="districtData"> DataFrame representing CVAP and Candidate results by precinct for the 
+/// district </param>
 /// <typeparam name="'a">The type of the Precinct Key index.  Should be string or int</typeparam>
 /// <returns> minority VRA Effectiveness Score for district </returns>
 let DistrictVRAEffectiveness ((name, minCol, totCol): Minority.Minority)
@@ -272,14 +273,14 @@ let DistrictVRAEffectiveness ((name, minCol, totCol): Minority.Minority)
 /// <summary>
 /// VRA Effectiveness Score for each district in the plan across all of the passed minority groups
 /// </summary>
-/// <param name="planData"></param>
-/// <param name="districtCol"></param>
-/// <param name="minorities"></param>
-/// <param name="elections"></param>
-/// <param name="successFunc"></param>
+/// <param name="planData"> Frame containing precinct data and column representing district </param>
+/// <param name="districtCol"> The Column containing district id. </param>
+/// <param name="minorities"> Array of `(Minority.Minority * LogitParams option)` pairs to use for VRA Effectiveness scores</param>
+/// <param name="elections"> Array of election groups to use in score computation </param>
+/// <param name="successFunc"> How success in an election group is defined for the CoC </param>
 /// <typeparam name="'a">The type of the Precinct Key index.   Should be string or int</typeparam>
 /// <typeparam name="'b">The type of the district id.  Should be string or int</typeparam>
-/// <returns></returns>
+/// <returns> PlanVRAScores type.  Representing VRA Effectiveness scores for each district for each minority group </returns>
 let PlanVRAEffectiveness planData (districtCol: Column) (minorities: (Minority.Minority * LogitParams option) array)
                          (elections: ElectionGroup array) (successFunc: SuccessFunction<'a>): PlanVRAScores<'b> = 
     let districtIDs = planData |> Frame.getCol districtCol |> Series.values |> Seq.distinct
@@ -294,6 +295,17 @@ let PlanVRAEffectiveness planData (districtCol: Column) (minorities: (Minority.M
     Array.zip minorityNames minorityScores |> Map.ofArray
 
 
+/// <summary>
+/// 
+/// </summary>
+/// <param name="planData"> Frame containing precinct data and column representing district </param>
+/// <param name="districtCol"> The Column containing district id. </param>
+/// <param name="minorities"> Array of `(Minority.Minority * LogitParams option)` pairs to use for VRA Effectiveness scores</param>
+/// <param name="elections"> Array of election groups to use in score computation </param>
+/// <param name="successFunc"> How success in an election group is defined for the CoC </param>
+/// <typeparam name="'a">The type of the Precinct Key index.   Should be string or int</typeparam>
+/// <typeparam name="'b">The type of the district id.  Should be string or int</typeparam>
+/// <returns> PlanVRASummary type.  Representing VRA Effectiveness scores, group control, and election details for each district for each minority group </returns>
 let PlanVRAEffectivenessDetailed planData (districtCol: Column) (minorities: (Minority.Minority * LogitParams option) array)
                                 (elections: ElectionGroup array) (successFunc: SuccessFunction<'a>): PlanVRASummary<'b>= 
     let districtIDs = planData |> Frame.getCol districtCol |> Series.values |> Seq.distinct
