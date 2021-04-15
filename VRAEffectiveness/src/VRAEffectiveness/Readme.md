@@ -1,12 +1,26 @@
-# AWS Lambda Empty Function Project
+# AWS Lambda VRAEffectiveness Project
 
 This starter project consists of:
 * Function.fs - Code file containing the function handler method
 * aws-lambda-tools-defaults.json - default argument settings for use with Visual Studio and command line deployment tools for AWS
+* VRAEffectiveness.fs - Code file containing representation of VRAEffectiveness score and summary details.
 
-You may also have a test project depending on the options selected.
+## VRA Effectiveness Score
 
-The generated function handler is a simple method accepting a string argument that returns the uppercase equivalent of the input string. Replace the body of this method, and parameters, to suit your needs. 
+* The alignment is 2 * (CVAP Share) clamped at 1.  The CVAP share for an election is based on the 5-year ACS where the election is central to the data (when possible.)  A table mapping election years to ACS release is shown below.
+
+
+|Election Year  |ACS Release  |
+|---------|-----------|
+|2012     | 2010-2014 |
+|2014     | 2012-2016 |
+|2015     | 2013-2017 |
+|2016     | 2014-2018 |
+|2017     | 2015-2019 |
+|2018     | 2015-2019 |
+|2019     | 2015-2019 |
+
+
 
 ## Here are some steps to follow from Visual Studio:
 

@@ -1,14 +1,15 @@
 {
-    "tot_cvap_col": "CVAP18",
+    "cvap_col": {"2015":"CVAP17","2016":"CVAP18","2017":"CVAP18","2018":"CVAP18","2019":"CVAP18"},
     "minorities": {
         "Black": {
-            "cvap_col": "BCVAP18",
+            "cvap_col": {"2015":"BCVAP17","2016":"BCVAP18","2017":"BCVAP18","2018":"BCVAP18","2019":"BCVAP18"},
             "logit_params": {"coef": 6.353083092800907, "intercept": -2.4095124801524066}
         }
     },
     "election_groups": [
         {
             "name": "GOV15",
+            "year": 2015,
             "score": {"Black": 1},
             "primary_cands": ["DeatonD_15P_Governor","EdwardsD_15P_Governor","SimpsonD_15P_Governor",
                               "AngelleR_15P_Governor","DardenneR_15P_Governor","VitterR_15P_Governor",
@@ -21,6 +22,7 @@
         },
         {
             "name": "SOS15",
+            "year": 2015,
             "score": {"Black": 1},
             "primary_cands": ["SchedlerR_15P_SOS","TysonD_15P_SOS"],
             "primary_coc": {"Black": "TysonD_15P_SOS"},
@@ -31,6 +33,7 @@
         },
         {
             "name": "PRES16",
+            "year": 2016,
             "score": {"Black": 1},
             "primary_cands": ["BurkeD_16P_President","ClintonD_16P_President","FuenteD_16P_President",
                               "HewesD_16P_President","JuddD_16P_President","OMalleyD_16P_President",
@@ -44,6 +47,7 @@
         },
         {
             "name": "SEN16",
+            "year": 2016,
             "score": {"Black": 1},
             "primary_cands": ["BilliotU_16P_US_Sen","HebertU_16P_US_Sen","LangU_16P_US_Sen",
                               "TaylorU_16P_US_Sen","WellsU_16P_US_Sen","CampbellD_16P_US_Sen",
@@ -61,6 +65,7 @@
         },
         {
             "name": "TRES17",
+            "year": 2017,
             "score": {"Black": 1},
             "primary_cands": ["EdwardsD_17P_Treasurer","LittleL_17P_Treasurer","DavisR_17P_Treasurer",
                               "HughesR_17P_Treasurer","RiserR_17P_Treasurer","SchroderR_17P_Treasurer"],
@@ -72,6 +77,7 @@
         },
         {
             "name": "SOS18",
+            "year": 2018,
             "score": {"Black": 1},
             "primary_cands": ["GreenupD_18P_SOS","FreeD_18P_SOS","MoreauI_18P_SOS","ArdoinR_18P_SOS",
                               "CloudR_18P_SOS","CroweR_18P_SOS","EdmondsR_18P_SOS","KennedyR_18P_SOS",
@@ -84,6 +90,7 @@
         },
         {
             "name": "TRES19",
+            "year": 2019,
             "score": {"Black": 1},
             "primary_cands": ["EdwardsD_19P_Treasurer","SchroderR_19P_Treasurer","KennyU_19P_Treasurer"],
             "primary_coc": {"Black": "EdwardsD_19P_Treasurer"},
@@ -94,6 +101,7 @@
         },
         {
             "name": "GOV19",
+            "year": 2019,
             "score": {"Black": 1},
             "primary_cands": ["DantzlerD_19P_Governor","EdwardsD_19P_Governor","AbrahaminR_19P_Governor",
                               "LandryR_19P_Governor","RisponeR_19P_Governor","LandrieuI_19P_Governor"],
@@ -105,6 +113,7 @@
         },
         {
             "name": "AGC19",
+            "year": 2019,
             "score": {"Black": 1},
             "primary_cands": ["GreenD_19P_Ag_Comm","GreerD_19P_Ag_Comm","WilliamsD_19P_Ag_Comm",
                               "StrainR_19P_Ag_Comm","ZaunbrecherR_19P_Ag_Comm"],
@@ -116,6 +125,7 @@
         },
         {
             "name": "LTG19",
+            "year": 2019,
             "score": {"Black": 1},
             "primary_cands": ["JonesD_19P_Lt_Governor","NungesserR_19P_Lt_Governor"],
             "primary_coc": {"Black": "JonesD_19P_Lt_Governor"},

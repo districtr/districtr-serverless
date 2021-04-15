@@ -1,16 +1,18 @@
 module VRAEffectiveness
 open FSharp.Data
 open Deedle
-open MathNet.Numerics.LinearAlgebra
 
 type MinorityGroup = string //Hispanic | Black | Asian | AMIN | Neither
 
 type Column = string
+type Year = string
+
+type CVAPColumn = Map<Year, Column>
 
 module Minority = 
     type Name = MinorityGroup
-    type MinCVAPCol = Column
-    type TotCVAPCol = Column
+    type MinCVAPCol = CVAPColumn
+    type TotCVAPCol = CVAPColumn
     type Minority = Name * MinCVAPCol * TotCVAPCol
 
 
@@ -42,6 +44,7 @@ type CandidatesOfChoice = Map<Minority.Name,Column>
 type ElectionGroup = 
     {
         Name: string
+        Year: Year
         Score: Map<Minority.Name, float>
         Primary: Election
         PrimaryCoC: CandidatesOfChoice
@@ -60,7 +63,13 @@ type LogitParams =
 /// Class representing Json Parser for state.
 /// Takes the JsonValue (from FSharp.dData) and defines instance members Minorities and Elections
 type Parser (data: JsonValue) =
-    let totCVAPcol = data.["tot_cvap_col"].AsString()
+
+    let ParseCVAPcol (data: JsonValue) = 
+        let cvapData = data.["cvap_col"]
+        match cvapData with 
+        | JsonValue.Record(cvapYears) -> cvapYears |> Array.map (fun (k,v) -> k, v.AsString())
+                                                   |> Map.ofArray
+        | _ -> Map.empty
 
     let getLogitParams (details: JsonValue) = 
         let logit_params = details.["logit_params"]
@@ -79,6 +88,7 @@ type Parser (data: JsonValue) =
 
     let getElectionGroup (electgroup: JsonValue) =
         let name = electgroup.["name"].AsString()
+        let year = electgroup.["year"].AsString()
         let scores = electgroup.["score"].Properties() 
                    |> Array.map (fun (k,v) -> k, v.AsFloat()) |> Map.ofArray
         
@@ -93,12 +103,12 @@ type Parser (data: JsonValue) =
         let general = ParseRunoffGeneralCands electgroup.["general_cands"]
         let generalCoC = ParseRunoffGeneralCoC electgroup.["general_coc"]
 
-        {Name=name; Score=scores; Primary=primary; PrimaryCoC=primaryCoC; Runoff=runoff; 
+        {Name=name; Year=year; Score=scores; Primary=primary; PrimaryCoC=primaryCoC; Runoff=runoff; 
          RunoffCoC=runoffCoC; General=general;GeneralCoC=generalCoC}
 
 
     member this.Minorities = data.["minorities"].Properties() 
-                           |> Array.map (fun (name, details) -> (Minority.Minority(name, details.["cvap_col"].AsString(), totCVAPcol),
+                           |> Array.map (fun (name, details) -> (Minority.Minority(name, ParseCVAPcol details, ParseCVAPcol data),
                                                                  getLogitParams details))
 
     member this.Elections = match data.["election_groups"] with
@@ -121,12 +131,12 @@ type ElectionDetails =
         ExistsGen: bool
         CoCGen: Column
         CoCPercGen: float
+        GroupControl: float
     }
 
 type DistrictSummary = 
     {
         Score: float
-        GroupControl: float
         ElectionDetails: ElectionDetails array
     }
     // static member ToJson (x: DistrictSummary) = 
@@ -196,6 +206,22 @@ let CoCCarriesElectTX (district: District<'a>) (minority: Minority.Name) (electi
                      | _ -> 0.
         PrimaryAdvance * RunoffWin * GenWin
 
+/// <summary>
+/// Compute the group CVAP share of a district.
+/// </summary>
+/// <param name="districtData"> Frame where each row is a precinct within the district and contains
+/// CVAP columns.
+/// </param>
+/// <param name="minority"> With respect to which minority?</param>
+/// <param name="year"> Which year to calculation CVAP share for? </param>
+/// <typeparam name="'a">The type of the Precinct Key index.  Should be string or int</typeparam>
+/// <returns> Minorities CVAP share estimate for year </returns>
+let CVAPShare (districtData: District<'a>) (minority: Minority.Minority) (year: Year) = 
+    let _, MinCVAPCol, TotCVAPCol = minority
+    let DistrictMinorityCVAP = Stats.sum districtData.[MinCVAPCol.[year]]
+    let DistrictTotalCVAP = Stats.sum districtData.[TotCVAPCol.[year]]
+    DistrictMinorityCVAP / DistrictTotalCVAP
+
 
 /// <summary>
 /// Compute the group alignment of a district; aka twice the minorities CVAP share capped at 1.
@@ -203,15 +229,14 @@ let CoCCarriesElectTX (district: District<'a>) (minority: Minority.Name) (electi
 /// <param name="districtData"> Frame where each row is a precinct within the district and contains
 /// CVAP columns.
 /// </param>
-/// <param name="minority"> With respect to which minority?
-///</param>
+/// <param name="minority"> With respect to which minority?</param>
+/// <param name="year"> Which year to calculation alignment for? </param>
 /// <typeparam name="'a">The type of the Precinct Key index.  Should be string or int</typeparam>
 /// <returns> Twice the minorities CVAP share capped at 1. </returns>
-let alignment (districtData: District<'a>) (minority: Minority.Minority) = 
-    let _, MinCVAPCol, TotCVAPCol = minority
-    let DistrictMinorityCVAP = Stats.sum districtData.[MinCVAPCol]
-    let DistrictTotalCVAP = Stats.sum districtData.[TotCVAPCol]
-    min (2. * (DistrictMinorityCVAP / DistrictTotalCVAP)) 1.
+let alignment (districtData: District<'a>) (minority: Minority.Minority) (year: Year) = 
+    let DistrictCVAPShare = CVAPShare districtData minority year
+    min (2. * DistrictCVAPShare) 1.
+
 
 
 /// <summary>
@@ -232,6 +257,7 @@ let DistrictElectionDetails ((name, minCol, totCol): Minority.Minority) (distric
     let CoCPlace = PrimaryVoteShares |> Series.filterValues (fun x -> x >= CoCShare) |> Series.countKeys
     let firstPlace = PrimaryVoteShares.GetAt 0
     let numberOfCands = PrimaryVoteShares.KeyCount
+    let groupAlignment = alignment district (name, minCol, totCol) election.Year
 
     let ExistsRunoff, CoCRO, CoCROShare = match election.RunoffCoC, election.Runoff with
                                           | Some cand, Some e -> true, cand.[name], e.VoteShares district |> Series.get cand.[name]
@@ -240,7 +266,8 @@ let DistrictElectionDetails ((name, minCol, totCol): Minority.Minority) (distric
                                           | Some cand, Some e -> true, cand.[name], e.VoteShares district |> Series.get cand.[name]
                                           | _ -> false, "", 0.
     
-    {Name=ElectName; CoC=CoC; CoCPerc=CoCShare; CoCPlace=CoCPlace; FirstPlacePerc=firstPlace; NumCands=numberOfCands;
+    {Name=ElectName; GroupControl=groupAlignment;
+     CoC=CoC; CoCPerc=CoCShare; CoCPlace=CoCPlace; FirstPlacePerc=firstPlace; NumCands=numberOfCands;
      ExistsRunoff=ExistsRunoff; CoCRO=CoCRO; CoCPercRO=CoCROShare;
      ExistsGen=ExistsGen; CoCGen=CoCGen;CoCPercGen=CoCGenShare}
 
@@ -259,12 +286,15 @@ let DistrictElectionDetails ((name, minCol, totCol): Minority.Minority) (distric
 let DistrictVRAEffectiveness ((name, minCol, totCol): Minority.Minority)
                              (elections: ElectionGroup array) (successFunc: SuccessFunction<'a>)
                              (logitParams: LogitParams option) (districtData: District<'a>) = 
-    let districtAlignment = alignment districtData (name, minCol, totCol)
+    let districtAlignment = elections |> Array.map (fun e -> alignment districtData (name, minCol, totCol) e.Year)
     let electionWeights = elections |> Array.map (fun (e: ElectionGroup) -> e.Score.[name]) 
-                                    |> Vector<float>.Build.DenseOfArray
+                                    // |> Vector<float>.Build.DenseOfArray
     let minPrefWins = elections |> Array.map (successFunc districtData name) 
-                                |> Vector<float>.Build.DenseOfArray
-    let minVRAscore = (electionWeights.DotProduct minPrefWins) * (districtAlignment / electionWeights.Sum())
+                                // |> Vector<float>.Build.DenseOfArray
+    
+    
+    let minVRAscore = Array.map3 (fun w c d -> w*c*d) electionWeights minPrefWins districtAlignment 
+                    |> Array.sum |> (/) <| Array.sum electionWeights
     match logitParams with
     | Some {LogitParams.Coef = coef; LogitParams.Intercept = intercept} -> 1./(1. + exp -(coef*minVRAscore + intercept))
     | None -> minVRAscore
@@ -315,7 +345,6 @@ let PlanVRAEffectivenessDetailed planData (districtCol: Column) (minorities: (Mi
     let districtDetails (minority: Minority.Minority) (logitparams: LogitParams option) (district: District<'a>) = 
         {
             Score = DistrictVRAEffectiveness minority elections successFunc logitparams district
-            GroupControl = alignment district minority
             ElectionDetails = elections |> Array.map (DistrictElectionDetails minority district)
         }
     
