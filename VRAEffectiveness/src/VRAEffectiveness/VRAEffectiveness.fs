@@ -257,7 +257,7 @@ let DistrictElectionDetails ((name, minCol, totCol): Minority.Minority) (distric
     let CoCPlace = PrimaryVoteShares |> Series.filterValues (fun x -> x >= CoCShare) |> Series.countKeys
     let firstPlace = PrimaryVoteShares.GetAt 0
     let numberOfCands = PrimaryVoteShares.KeyCount
-    let groupAlignment = alignment district (name, minCol, totCol) election.Year
+    let groupAlignment = CVAPShare district (name, minCol, totCol) election.Year
 
     let ExistsRunoff, CoCRO, CoCROShare = match election.RunoffCoC, election.Runoff with
                                           | Some cand, Some e -> true, cand.[name], e.VoteShares district |> Series.get cand.[name]
@@ -287,10 +287,8 @@ let DistrictVRAEffectiveness ((name, minCol, totCol): Minority.Minority)
                              (elections: ElectionGroup array) (successFunc: SuccessFunction<'a>)
                              (logitParams: LogitParams option) (districtData: District<'a>) = 
     let districtAlignment = elections |> Array.map (fun e -> alignment districtData (name, minCol, totCol) e.Year)
-    let electionWeights = elections |> Array.map (fun (e: ElectionGroup) -> e.Score.[name]) 
-                                    // |> Vector<float>.Build.DenseOfArray
-    let minPrefWins = elections |> Array.map (successFunc districtData name) 
-                                // |> Vector<float>.Build.DenseOfArray
+    let electionWeights = elections |> Array.map (fun (e: ElectionGroup) -> e.Score.[name])
+    let minPrefWins = elections |> Array.map (successFunc districtData name)
     
     
     let minVRAscore = Array.map3 (fun w c d -> w*c*d) electionWeights minPrefWins districtAlignment 

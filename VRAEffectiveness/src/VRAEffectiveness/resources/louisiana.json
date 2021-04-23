@@ -1,5 +1,5 @@
 {
-    "cvap_col": {"2015":"CVAP17","2016":"CVAP18","2017":"CVAP18","2018":"CVAP18","2019":"CVAP18"},
+    "cvap_col": {"2015":"CVAP15","2016":"CVAP16","2017":"CVAP17","2018":"CVAP18","2019":"CVAP18"},
     "minorities": {
         "Black": {
             "cvap_col": {"2015":"BCVAP17","2016":"BCVAP18","2017":"BCVAP18","2018":"BCVAP18","2019":"BCVAP18"},
