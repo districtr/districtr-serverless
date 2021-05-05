@@ -23,7 +23,9 @@ type Function() =
     let (+/) path path' = System.IO.Path.Combine(path, path')
     let PathCombine path path' path'' = System.IO.Path.Combine(path, path', path'')
 
-    let StateSuccessFunction: Map<string, SuccessFunction<string>> = Map.ofArray [|"texas", CoCCarriesElectTX; "louisiana", CoCCarriesElectLA|]
+    let StateSuccessFunction: Map<string, SuccessFunction<string>> = Map.ofArray [|"texas", CoCCarriesElectTX; 
+                                                                                   "louisiana", CoCCarriesElectLA;
+                                                                                   "massachusetts", CoCCarriesElectPlurality|]
 
     static member executingAssembly = System.Reflection.Assembly.GetExecutingAssembly().Location
     static member executingAssemblyDir = System.IO.Path.GetDirectoryName Function.executingAssembly
@@ -52,8 +54,9 @@ type Function() =
         let VRAparser = Parser JsonValue
         let Minorities = VRAparser.Minorities
         let Elections = VRAparser.Elections
+        let AlignmentYear = VRAparser.AlignmentYear
         let CoCSuccess = StateSuccessFunction.[stateName]
         
-        let vrascores: PlanVRASummary<int> = PlanVRAEffectivenessDetailed PlanData districtID Minorities Elections CoCSuccess
+        let vrascores: PlanVRASummary<int> = PlanVRAEffectivenessDetailed PlanData districtID Minorities Elections CoCSuccess AlignmentYear
         
         JsonConvert.SerializeObject {SeqID = requestID; Data=vrascores}
