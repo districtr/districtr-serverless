@@ -7,7 +7,7 @@
             "logit_params": {"coef": 8.999168254502017, "intercept": -2.5902236098513614}
         },
         "Hispanic": {
-            "cvap_col": {"2012":"HCVAP14","2014":"HCVAP16","2016":"HCVAP18","2018":"HCVAP18","2019":"BCVAP18"},
+            "cvap_col": {"2012":"HCVAP14","2014":"HCVAP16","2016":"HCVAP18","2018":"HCVAP18","2019":"HCVAP18"},
             "logit_params": {"coef": 8.047228839205859, "intercept": -3.449593823801358}
         }
     },

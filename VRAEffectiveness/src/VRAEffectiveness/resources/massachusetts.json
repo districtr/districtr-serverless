@@ -5,17 +5,17 @@
         "Black": {
             "cvap_col": {"2013":"BCVAP14","2014":"BCVAP14","2016":"BCVAP16","2018":"BCVAP18",
                          "2020":"BCVAP19"},
-            "logit_params": {"coef": 7.79852866593786, "intercept": -1.6980581277469118}
+            "logit_params": null
         },
         "Hispanic": {
             "cvap_col": {"2013":"HCVAP14","2014":"HCVAP14","2016":"HCVAP16","2018":"HCVAP18",
                          "2020":"HCVAP19"},
-            "logit_params": {"coef": 7.555127199489336, "intercept": -1.203525185477424}
+            "logit_params": null
         },
         "Asian": {
             "cvap_col": {"2013":"ASIANCVAP14","2014":"ASIANCVAP14","2016":"ASIANCVAP16",
                          "2018":"ASIANCVAP18","2020":"ASIANCVAP19"},
-            "logit_params": {"coef": 6.866181704356891, "intercept": -0.34799275995986867}
+            "logit_params": null
         }
     },
     "election_groups": [
