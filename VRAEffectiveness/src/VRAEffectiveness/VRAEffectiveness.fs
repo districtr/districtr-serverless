@@ -138,6 +138,7 @@ type ElectionDetails =
 type DistrictSummary = 
     {
         Score: float
+        CVAPShare: float
         ElectionDetails: ElectionDetails array
     }
 
@@ -146,6 +147,8 @@ type PlanVRASummary<'a when 'a : comparison > = Map<Minority.Name, Map<'a, Distr
 
 
 type SuccessFunction<'a when 'a : equality> =  District<'a> -> Minority.Name -> ElectionGroup -> float
+
+type AlignmentFunction<'a when 'a : equality> = District<'a> -> Minority.Minority -> Year -> float
 
 /// <summary>
 ///     Represents Success of a candidate of choice with respect to the passed election group in
@@ -255,10 +258,12 @@ let CVAPShare (districtData: District<'a>) (minority: Minority.Minority) (year: 
 /// <param name="year"> Which year to calculation alignment for? </param>
 /// <typeparam name="'a">The type of the Precinct Key index.  Should be string or int</typeparam>
 /// <returns> Twice the minorities CVAP share capped at 1. </returns>
-let alignment (districtData: District<'a>) (minority: Minority.Minority) (year: Year) = 
+let AlignmentCVAP (districtData: District<'a>) (minority: Minority.Minority) (year: Year) = 
     let DistrictCVAPShare = CVAPShare districtData minority year
     min (2. * DistrictCVAPShare) 1.
 
+/// Vacuous alignment version, for non-calibrating by CVAP Share.
+let EmptyAlignment (districtData: District<'a>) (minority: Minority.Minority) (year: Year) = 1.
 
 
 /// <summary>
@@ -308,7 +313,7 @@ let DistrictElectionDetails ((name, minCol, totCol): Minority.Minority) (distric
 /// <returns> minority VRA Effectiveness Score for district </returns>
 let DistrictVRAEffectiveness ((name, minCol, totCol): Minority.Minority)
                              (elections: ElectionGroup array) (successFunc: SuccessFunction<'a>)
-                             (logitParams: LogitParams option) (alignmentYear: Year) (districtData: District<'a>) = 
+                             (logitParams: LogitParams option) (alignmentYear: Year) alignment (districtData: District<'a>) = 
     let districtAlignment = alignment districtData (name, minCol, totCol) alignmentYear
     let electionWeights = elections |> Array.map (fun (e: ElectionGroup) -> e.Score.[name])
     let minPrefWins = elections |> Array.map (successFunc districtData name)
@@ -334,12 +339,13 @@ let DistrictVRAEffectiveness ((name, minCol, totCol): Minority.Minority)
 /// <typeparam name="'b">The type of the district id.  Should be string or int</typeparam>
 /// <returns> PlanVRAScores type.  Representing VRA Effectiveness scores for each district for each minority group </returns>
 let PlanVRAEffectiveness planData (districtCol: Column) (minorities: (Minority.Minority * LogitParams option) array)
-                         (elections: ElectionGroup array) (successFunc: SuccessFunction<'a>) (alignmentYear: Year): PlanVRAScores<'b> = 
+                         (elections: ElectionGroup array) (successFunc: SuccessFunction<'a>) (alignmentYear: Year) alignment
+                         : PlanVRAScores<'b> = 
     let districtIDs = planData |> Frame.getCol districtCol |> Series.values |> Seq.distinct
     let districts = districtIDs |> Seq.map (fun d -> planData |> Frame.filterRowsBy districtCol d)
     
     let PlanVRAEffectivenessForMinority (minority: Minority.Minority, logitparams: LogitParams option) = 
-        let VRAscores = districts |> Seq.map (DistrictVRAEffectiveness minority elections successFunc logitparams alignmentYear)
+        let VRAscores = districts |> Seq.map (DistrictVRAEffectiveness minority elections successFunc logitparams alignmentYear alignment)
         Seq.zip districtIDs VRAscores |> Map
     
     let minorityNames = minorities |> Array.map ((fun (name,_,_) -> name) << fst)
@@ -361,13 +367,14 @@ let PlanVRAEffectiveness planData (districtCol: Column) (minorities: (Minority.M
 /// <typeparam name="'b">The type of the district id.  Should be string or int</typeparam>
 /// <returns> PlanVRASummary type.  Representing VRA Effectiveness scores, group control, and election details for each district for each minority group </returns>
 let PlanVRAEffectivenessDetailed planData (districtCol: Column) (minorities: (Minority.Minority * LogitParams option) array)
-                                (elections: ElectionGroup array) (successFunc: SuccessFunction<'a>) (alignmentYear: Year): PlanVRASummary<'b>= 
+                                (elections: ElectionGroup array) (successFunc: SuccessFunction<'a>) (alignmentYear: Year) alignment: PlanVRASummary<'b>= 
     let districtIDs = planData |> Frame.getCol districtCol |> Series.values |> Seq.distinct
     let districts = districtIDs |> Seq.map (fun d -> planData |> Frame.filterRowsBy districtCol d)
     
     let districtDetails (minority: Minority.Minority) (logitparams: LogitParams option) (district: District<'a>) = 
         {
-            Score = DistrictVRAEffectiveness minority elections successFunc logitparams alignmentYear district
+            Score = DistrictVRAEffectiveness minority elections successFunc logitparams alignmentYear alignment district 
+            CVAPShare = CVAPShare district minority alignmentYear
             ElectionDetails = elections |> Array.map (DistrictElectionDetails minority district)
         }
     
