@@ -1,18 +1,20 @@
 {
-    "tot_cvap_col": "CVAP18",
+    "alignment_year": "2019",
+    "cvap_col": {"2012":"CVAP12","2014":"CVAP14","2016":"CVAP16","2018":"CVAP18", "2019":"CVAP18"},
     "minorities": {
         "Black": {
-            "cvap_col": "BCVAP18",
+            "cvap_col":{"2012":"BCVAP14","2014":"BCVAP16","2016":"BCVAP18","2018":"BCVAP18","2019":"BCVAP18"},
             "logit_params": {"coef": 8.999168254502017, "intercept": -2.5902236098513614}
         },
         "Hispanic": {
-            "cvap_col": "HCVAP18",
+            "cvap_col": {"2012":"HCVAP14","2014":"HCVAP16","2016":"HCVAP18","2018":"HCVAP18","2019":"HCVAP18"},
             "logit_params": {"coef": 8.047228839205859, "intercept": -3.449593823801358}
         }
     },
     "election_groups": [
         {
             "name": "PRES12",
+            "year": 2012,
             "score": {"Black": 0.35338145372888013, "Hispanic": 0.17669072686444007},
             "primary_cands": ["ElyD_12P_President", "WolfeD_12P_President", "RichardsonD_12P_President", "ObamaD_12P_President"],
             "primary_coc": {"Black": "ObamaD_12P_President", "Hispanic": "ObamaD_12P_President"},
@@ -23,6 +25,7 @@
         },
         {
             "name": "SEN12",
+            "year": 2012,
             "score": {"Black": 0.17669072686444007, "Hispanic": 0.17669072686444007},
             "primary_cands": ["AllenD_12P_US_Sen", "HubbardD_12P_US_Sen", "SadlerD_12P_US_Sen", "YarbroughD_12P_US_Sen"],
             "primary_coc": {"Black": "SadlerD_12P_US_Sen", "Hispanic": "SadlerD_12P_US_Sen"},
@@ -34,6 +37,7 @@
         },
         {
             "name": "AGC14",
+            "year": 2014,
             "score": {"Black": 0.2499161624673834, "Hispanic": 0.2499161624673834},
             "primary_cands": ["FitzsimonsD_14P_Ag_Comm","HoganD_14P_Ag_Comm","FriedmanD_14P_Ag_Comm"],
             "primary_coc": {"Black": "HoganD_14P_Ag_Comm", "Hispanic": "FriedmanD_14P_Ag_Comm"},
@@ -44,6 +48,7 @@
         },
         {
             "name": "GOV14",
+            "year": 2014,
             "score": {"Black": 0.2499161624673834, "Hispanic": 0.2499161624673834},
             "primary_cands": ["MadrigalD_14P_Governor", "DavisD_14P_Governor"],
             "primary_coc": {"Black": "DavisD_14P_Governor", "Hispanic": "DavisD_14P_Governor"},
@@ -54,6 +59,7 @@
         },
         {
             "name": "RRC14",
+            "year": 2014,
             "score": {"Black": 0.4998323249347668, "Hispanic": 0.2499161624673834},
             "primary_cands": ["HenryD_14P_RR_Comm_3", "BrownD_14P_RR_Comm_3"],
             "primary_coc": {"Black": "BrownD_14P_RR_Comm_3", "Hispanic": "BrownD_14P_RR_Comm_3"},
@@ -64,6 +70,7 @@
         },
         {
             "name": "SEN14",
+            "year": 2014,
             "score": {"Black": 0.2499161624673834, "Hispanic": 0.2499161624673834},
             "primary_cands": ["AlameelD_14P_US_Sen","KimD_14P_US_Sen","RogersD_14P_US_Sen","ScherrD_14P_US_Sen","FjetlandD_14P_US_Sen"],
             "primary_coc": {"Black": "AlameelD_14P_US_Sen", "Hispanic": "AlameelD_14P_US_Sen"},
@@ -74,6 +81,7 @@
         },
         {
             "name": "RRC16",
+            "year": 2016,
             "score": {"Black": 0.7067629074577604, "Hispanic": 0.34526565248024293},
             "primary_cands": ["GarrettD_16P_RR_Comm_1","YarbroughD_16P_RR_Comm_1","BurnamD_16P_RR_Comm_1"],
             "primary_coc": {"Black": "YarbroughD_16P_RR_Comm_1", "Hispanic": "YarbroughD_16P_RR_Comm_1"},
@@ -84,6 +92,7 @@
         },
         {
             "name": "PRES16",
+            "year": 2016,
             "score": {"Black": 0.3533814537288802, "Hispanic": 0.3533814537288802},
             "primary_cands": ["JuddD_16P_President","De La FuenteD_16P_President","ClintonD_16P_President","LockeD_16P_President","OMalleyD_16P_President","SandersD_16P_President","WIlsonD_16P_President","HawesD_16P_President"],
             "primary_coc": {"Black": "ClintonD_16P_President", "Hispanic": "ClintonD_16P_President"},
@@ -94,6 +103,7 @@
         },
         {
             "name": "COMP18",
+            "year": 2018,
             "score": {"Black": 0.4961315991200186, "Hispanic": 0.4998323249347668},
             "primary_cands": ["MahoneyD_18P_Comptroller","ChevalierD_18P_Comptroller"],
             "primary_coc": {"Black": "MahoneyD_18P_Comptroller", "Hispanic": "MahoneyD_18P_Comptroller"},
@@ -104,6 +114,7 @@
         },
         {
             "name": "GOV18",
+            "year": 2018,
             "score": {"Black": 0.020466978028009744, "Hispanic": 0.9996646498695336},
             "primary_cands": ["WakelyD_18P_Governor","ClarkD_18P_Governor","PayneD_18P_Governor","YarbroughD_18P_Governor","DavisD_18P_Governor","OceguedaD_18P_Governor","ValdezD_18P_Governor","WhiteD_18P_Governor","MumbachD_18P_Governor"],
             "primary_coc": {"Black": "ValdezD_18P_Governor", "Hispanic": "ValdezD_18P_Governor"},
@@ -114,6 +125,7 @@
         },
         {
             "name": "LTG18",
+            "year": 2018,
             "score": {"Black": 0.9996646498695336, "Hispanic": 0.4998323249347668},
             "primary_cands": ["CooperD_18P_Lt_Governor","CollierD_18P_Lt_Governor"],
             "primary_coc": {"Black": "CooperD_18P_Lt_Governor", "Hispanic": "CooperD_18P_Lt_Governor"},
@@ -124,6 +136,7 @@
         },
         {
             "name": "PLC18",
+            "year": 2018,
             "score": {"Black": 0.4998323249347668, "Hispanic": 0.9996646498695336},
             "primary_cands": ["SuazoD_18P_Land_Comm","MorganD_18P_Land_Comm"],
             "primary_coc": {"Black": "SuazoD_18P_Land_Comm", "Hispanic": "SuazoD_18P_Land_Comm"},
@@ -134,6 +147,7 @@
         },
         {
             "name": "RRC18",
+            "year": 2018,
             "score": {"Black": 0.9996646498695336, "Hispanic": 0.9996646498695336},
             "primary_cands": ["McAllenD_18P_RR_Comm_1","SpellmonD_18P_RR_Comm_1"],
             "primary_coc": {"Black": "SpellmonD_18P_RR_Comm_1", "Hispanic": "McAllenD_18P_RR_Comm_1"},
@@ -144,6 +158,7 @@
         },
         {
             "name": "SEN18",
+            "year": 2018,
             "score": {"Black": 0.4998323249347668, "Hispanic": 0.4998323249347668},
             "primary_cands": ["KimbroughD_18P_US_Sen","HernandezD_18P_US_Sen","ORourkeD_18P_US_Sen"],
             "primary_coc": {"Black": "ORourkeD_18P_US_Sen", "Hispanic": "ORourkeD_18P_US_Sen"},
