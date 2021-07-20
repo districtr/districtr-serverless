@@ -9,9 +9,16 @@ Given a set of id * district pairs, D, return the set D' of id * centroid pairs,
 * Counties
     * Iowa
 * Precincts
+    * AK
+    * LA
+    * MA
     * MI
+    * MN
     * NM
-    * PA
     * OH
+    * PA
     * TX
+    * UT
+    * WI
+
 * Blocks
