@@ -5,6 +5,7 @@ Given a set of unit ids that make up a district return the coordinate point (lon
 ## Subfolders 
 
 * `/districtCenter`: subfolder containing python code / dependencies for AWS Lambda function districtCenter. (described above)
+    * `/districtCenter/package`: zips of dependecies for lambda function.
 * `/districtCenterDataPrep`: subfolder containing python scripts used to generate CSVs in `/districtCenter/resources/` folder.
 
 
