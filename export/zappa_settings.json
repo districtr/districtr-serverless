@@ -1,0 +1,18 @@
+{
+    "dev": {
+        "app_function": "app.app",
+        "aws_region": "us-east-1",
+        "profile_name": "mggg",
+        "project_name": "districtr-export",
+        "runtime": "python3.8",
+        "s3_bucket": "districtr-exports"
+    },
+    "prod": {
+        "app_function": "app.app",
+        "aws_region": "us-east-1",
+        "profile_name": "mggg",
+        "project_name": "districtr-export",
+        "runtime": "python3.8",
+        "s3_bucket": "districtr-exports"
+    }
+}

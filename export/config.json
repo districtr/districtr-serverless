@@ -1,0 +1,258 @@
+{
+    # blockgroups and precincts: how do we support both?
+    # place.id=alaska will be split into "alaska" and "alaska_bg" (when units.id=="blockgroups") on the server
+    # just direct them to the correct file for that type
+    # if your id already includes _bg it will not double up
+
+    "alabama_bg": "shapefiles/alabama/tl_2010_01_bg10",
+
+    "alaska": "shapefiles/alaska/alaska_precincts",
+        "alaska_bg": "shapefiles/alaska/tl_2010_02_bg10",
+
+    "arizona": "shapefiles/arizona/az_precincts",
+        "arizona_bg": "shapefiles/arizona/tl_2010_04_bg10",
+        "mesaaz": "shapefiles/arizona/mesa2",
+        "maricopa": null,
+        "nwaz": null,
+        "seaz": null,
+        "phoenix": null,
+        "yuma": null,
+
+    "arkansas_bg": "shapefiles/arkansas/tl_2010_05_bg10",
+        "little_rock": null,
+
+    # California
+    "california_bg": "shapefiles/california/tl_2010_06_bg10",
+        "lax_bg": "shapefiles/lax/tl_2010_06037_bg10",
+        "ccsanitation": "shapefiles/ccsani/CentralSan_Census_Block",
+        "ccsanitation2": "shapefiles/ccsani/CentralSan_Census_Block",
+        "napa": null,
+        "napaschools": null,
+        "ontarioca": null,
+        "ca_amador": "shapefiles/california/Amador_county",
+        "ca_lockwood": "shapefiles/california/lockwood_blocks",
+        "ca_alturas": "shapefiles/california/alturas_blocks",
+        "ca_CCosta_bg": "shapefiles/california/ContraCosta_county",
+        "ca_SanBenito": "shapefiles/california/SanBenito_county",
+        "ca_SanDiego_bg": "shapefiles/california/SanDiego_county",
+        "ca_sutter": "shapefiles/california/Sutter_county",
+        "pasorobles": "shapefiles/california/CensusBlocks_2010_1519CVAP",
+        "sacramento": "shapefiles/california/Sacramento_county",
+        "ca_sonoma": "shapefiles/california/sonoma",
+        "sanluiso": "shapefiles/california/sanluiso",
+        "napa2021": "shapefiles/california/napa2021",
+        "napacounty2021": "shapefiles/california/napacounty2021",
+        "sanjoseca": "shapefiles/california/sanjose",
+        "redwood": "shapefiles/california/redwood",
+        "ca_ventura": "shapefiles/california/ventura",
+        "ca_yolo": "shapefiles/california/yolo",
+        "ca_siskiyou": "shapefiles/california/siskiyou2",
+        "ca_marin": "shapefiles/california/ca_marin",
+        "ca_pasadena": "shapefiles/california/ca_pasadena",
+        "ca_solano": "shapefiles/california/ca_solano",
+        "ca_kings": "shapefiles/california/ca_kings",
+        "ca_merced": "shapefiles/california/ca_merced",
+        "ca_goleta": "shapefiles/california/ca_goleta",
+        "ca_santabarbara": "shapefiles/california/ca_santabarbara",
+        "ca_fresno": "shapefiles/california/ca_fresno",
+        "ca_marina": "shapefiles/california/ca_marina",
+        "ca_arroyo": "shapefiles/california/ca_arroyo",
+        "ca_sm_county": "shapefiles/california/ca_sm_county",
+        "ca_sanbenito": "shapefiles/california/ca_sanbenito",
+
+    "colorado": "shapefiles/colorado/co_precincts",
+        "colorado_bg": "shapefiles/colorado/tl_2010_08_bg10",
+
+    "connecticut": "shapefiles/connecticut/CT_precincts",
+        "connecticut_bg": "shapefiles/connecticut/tl_2010_09_bg10",
+
+    "delaware": "shapefiles/delaware/DE_precincts",
+        "delaware_bg": "shapefiles/delaware/tl_2010_10_bg10",
+
+    "dc_bg": "shapefiles/wadc/tl_2010_11_bg10",
+
+    "florida_bg": "shapefiles/florida/tl_2010_12_bg10",
+        "miamidade": null,
+        "miamifl": null,
+        "fl_orange_bg": "shapefiles/florida/fl_orange",
+        "fl_hills_bg": "shapefiles/florida/fl_hillsborough",
+        "fl_osceola": "shapefiles/florida/osceola_blocks",
+        "kissimmee": "shapefiles/florida/kissimmee_blocks",
+        "orlando": "shapefiles/florida/orlando_blocks",
+        "tampa": "shapefiles/florida/tampa_blocks",
+
+    "georgia": "shapefiles/georgia/GA_precincts16",
+        "georgia_bg": "shapefiles/georgia/tl_2010_13_bg10",
+
+    "hawaii": "shapefiles/hawaii/HI_precincts",
+        "hawaii_bg": "shapefiles/hawaii/tl_2010_15_bg10",
+
+    "idaho_bg": "shapefiles/idaho/tl_2010_16_bg10",
+
+    "illinois_bg": "shapefiles/illinois/tl_2010_17_bg10",
+        "chicago": null,
+
+    "indiana": "shapefiles/indiana/Indiana",
+    "indianaprec": "shapefiles/indiana/Indiana",
+        "indiana_bg": "shapefiles/indiana/tl_2010_18_bg10",
+
+    "iowa": "shapefiles/IA_counties/IA_counties",
+        "iowa_bg": "shapefiles/iowa/tl_2010_19_bg10",
+
+    "kansas_bg": "shapefiles/kansas/tl_2010_20_bg10",
+
+    "kentucky_bg": "shapefiles/kentucky/tl_2010_21_bg10",
+
+    "louisiana": "shapefiles/louisiana/LA_1519",
+        "louisiana_bg": "shapefiles/louisiana/tl_2010_22_bg10",
+        "batonrouge_bg": "shapefiles/louisiana/batonrouge",
+        "la_vra": true,
+
+
+    "maine": "shapefiles/maine/Maine",
+        "maine_bg": "shapefiles/maine/tl_2010_23_bg10",
+
+    "maryland": "shapefiles/maryland/MD_precincts",
+        "maryland_bg": "shapefiles/maryland/tl_2010_24_bg10",
+        "baltimore_bg": "shapefiles/maryland/baltimore_bgs_weighted",
+
+    # Massachusetts
+    "ma": "shapefiles/massachusetts/TOWNSSURVEY_POLYM_GENCOAST",
+        "ma_12": "shapefiles/massachusetts/MA_precincts12_16",
+        "ma_02": "shapefiles/massachusetts/MA_precincts_02_10",
+        "ma_bg": "shapefiles/massachusetts/tl_2010_25_bg10",
+        "ma_vra": "shapefiles/massachusetts/MA_VRA_Product",
+        "lowell": "shapefiles/lowell/lowell-contig",
+        "ma_vra": true,
+
+    "michigan": "shapefiles/michigan/MI",
+        "michigan_bg": "shapefiles/michigan/tl_2010_26_bg10",
+
+    "minnesota": "shapefiles/minnesota/mn_precincts12_18",
+        "minnesota_bg": "shapefiles/minnesota/tl_2010_27_bg10",
+        "mn2020acs": "shapefiles/minnesota/mn-precincts-2020-acs-elections-adjoined",
+        "olmsted": null,
+        "rochestermn": null,
+        "washington_mn_bg": "shapefiles/minnesota/tl_2010_27163_bg10",
+        "stlouis_mn_bg": "shapefiles/minnesota/tl_2010_27137_bg10",
+
+    # Mississippi
+        "mississippi_bg": "shapefiles/mississippi/tl_2010_28_bg10",
+
+    # Missouri
+        "missouri_bg": "shapefiles/missouri/tl_2010_29_bg10",
+
+    # Montana
+        "montana_bg": "shapefiles/montana/tl_2010_30_bg10",
+
+    "nebraska": "shapefiles/nebraska/NE",
+        "nebraska_bg": "shapefiles/nebraska/tl_2010_31_bg10",
+    # Nevada
+        "nevada_bg": "shapefiles/nevada/tl_2010_32_bg10",
+
+    "newhampshire": "shapefiles/newhampshire/NH",
+        "newhampshire_bg": "shapefiles/newhampshire/tl_2010_33_bg10",
+
+    # New Jersey
+        "newjersey_bg": "shapefiles/newjersey/tl_2010_34_bg10",
+
+    "new_mexico": "shapefiles/new_mexico/new_mexico_precincts",
+        "new_mexico_portal": "shapefiles/new_mexico/new_mexico_precincts",
+        "new_mexico_bg": "shapefiles/new_mexico/tl_2010_35_bg10",
+        "santafe": "shapefiles/new_mexico/santafe",
+
+    # New York
+        "newyork_bg": "shapefiles/newyork/tl_2010_36_bg10",
+
+    # North Carolina
+    "nc": "shapefiles/northcarolina/NC_VTD",
+    "northcarolina": "shapefiles/northcarolina/NC_VTD",
+        "nc_bg": "shapefiles/northcarolina/tl_2010_37_bg10",
+        "northcarolina_bg": "shapefiles/northcarolina/tl_2010_37_bg10",
+        "forsyth_nc": "shapefiles/forsyth_nc/forsyth-nc",
+        "buncombe": "shapefiles/northcarolina/buncombe",
+
+    # North Dakota
+    "northdakota": "shapefiles/northdakota/ND_pop",
+        "northdakota_bg": "shapefiles/northdakota/tl_2010_38_bg10",
+        "nd_benson": "shapefiles/northdakota/benson-county-2019",
+
+    "ohio": "shapefiles/ohio/OH_precincts",
+        "ohio_bg": "shapefiles/ohio/tl_2010_39_bg10",
+        "ohse_bg": "shapefiles/ohio/se_zone",
+        "ohcentral_bg": "shapefiles/ohio/oh_centralzone",
+        "ohtoledo_bg": "shapefiles/ohio/toledo_zone",
+        "ohcin_bg": "shapefiles/ohio/cincinnati_zone",
+        "ohcle_bg": "shapefiles/ohio/cleveland_zone",
+        "ohakron_bg": "shapefiles/ohio/akron_zone",
+
+        "akroncanton": "shapefiles/ohio/akron-canton-blocks",
+        "cincinnati": "shapefiles/ohio/cincinatti-blocks",
+        "clevelandeuclid": "shapefiles/ohio/cleveland-euclid-blocks",
+        "columbus": "shapefiles/ohio/columbus-etc-blocks",
+        "dayton": "shapefiles/ohio/dayton-blocks",
+        "limaoh": "shapefiles/ohio/lima-blocks",
+        "mansfield": "shapefiles/ohio/mansfield-blocks",
+        "portsmouthoh": "shapefiles/ohio/portsmouth-blocks",
+        "toledo": "shapefiles/ohio/toledo-blocks",
+        "youngstown": "shapefiles/ohio/youngstown-blocks",
+
+    "oklahoma": "shapefiles/oklahoma/OK_precincts",
+        "oklahoma_bg": "shapefiles/oklahoma/tl_2010_40_bg10",
+
+    "oregon": "shapefiles/oregon/OR_precincts",
+        "oregon_bg": "shapefiles/oregon/tl_2010_41_bg10",
+        "portlandor": null,
+
+    "pennsylvania": "shapefiles/pennsylvania/PA",
+        "pennsylvania_bg": "shapefiles/pennsylvania/tl_2010_42_bg10",
+        "philadelphia": null,
+
+    "puertorico_prec": "shapefiles/puertorico/PR",
+        "puertorico_bg": "shapefiles/puertorico/tl_2010_72_bg10",
+
+    "rhode_island": "shapefiles/rhodeisland/RI_precincts",
+        "rhode_island_bg": "shapefiles/rhodeisland/tl_2010_44_bg10",
+
+    # South Carolina
+        "southcarolina_bg": "shapefiles/southcarolina/tl_2010_45_bg10",
+
+    # South Dakota
+        "southdakota_bg": "shapefiles/southdakota/tl_2010_46_bg10",
+
+    # Tennessee
+        "tennessee_bg": "shapefiles/tennessee/tl_2010_47_bg10",
+
+    "texas": "shapefiles/TX_vtds/TX_vtds",
+        "tx_vra": "shapefiles/texas/TX_VRA",
+        "texas_bg": "shapefiles/texas/tl_2010_48_bg10",
+        "houston_bg": "shapefiles/texas/houston-bg",
+        "elpasotx": "shapefiles/texas/elpasotx-prec",
+        "elpasotx_b": "shapefiles/texas/tl_2010_48141_tabblock10",
+
+    "utah": "shapefiles/utah/UT_precincts",
+        "utah_bg": "shapefiles/utah/tl_2010_49_bg10",
+        "grand_county_2": "shapefiles/utah/grandcounty",
+
+    "vermont": "shapefiles/vermont/VT_town_results",
+        "vermont_bg": "shapefiles/vermont/tl_2010_50_bg10",
+
+    "virginia": "shapefiles/virginia/VA_precincts",
+        "virginia_bg": "shapefiles/virginia/tl_2010_51_bg10",
+        "vabeach": null,
+
+    # Washington (state)
+        "washington": "shapefiles/washington/tl_2010_53_bg10",
+        "washington_bg": "shapefiles/washington/tl_2010_53_bg10",
+
+    # West Virginia
+        "westvirginia_bg": "shapefiles/westvirginia/tl_2010_54_bg10",
+
+    "wisconsin": "shapefiles/wisconsin/WI_ltsb_corrected_final",
+        "wisconsin2020": "shapefiles/wisconsin/WI",
+        "wisco2019acs": "shapefiles/wisconsin/wisconsin-wards-2020-acs-adjoined",
+        "wisconsin_bg": "shapefiles/wisconsin/tl_2010_55_bg10",
+
+    # wyoming
+        "wyoming_bg": "shapefiles/wyoming/tl_2010_56_bg10"
+}
