@@ -77,8 +77,8 @@ def create_export(
     """
     tempdir = tempfile.TemporaryDirectory()
     shp.to_file(f"{tempdir.name}/{name}{ending}", driver=driver)
-    shp_archive = shutil.make_archive(f"/tmp/{name}", "zip", tempdir.name)
-    return flask.send_from_directory("/tmp", f"{name}.zip")
+    shp_archive = shutil.make_archive(f"/tmp/{name}", "xztar", tempdir.name)
+    return flask.send_from_directory("/tmp", f"{name}.tar.xz")
     # shp_archive = shutil.make_archive(f"/tmp/{name}", "zip", tempdir.name)
     # return flask.send_from_directory("/tmp", f"{name}.zip")
 
