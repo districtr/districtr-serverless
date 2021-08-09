@@ -77,10 +77,9 @@ def create_export(
     """
     tempdir = tempfile.TemporaryDirectory()
     shp.to_file(f"{tempdir.name}/{name}{ending}", driver=driver)
-    shp_archive = shutil.make_archive(f"/tmp/{name}", "xztar", tempdir.name)
-    return flask.send_from_directory("/tmp", f"{name}.tar.xz")
-    # shp_archive = shutil.make_archive(f"/tmp/{name}", "zip", tempdir.name)
-    # return flask.send_from_directory("/tmp", f"{name}.zip")
+    shp_archive = shutil.make_archive(f"/tmp/{name}", "zip", tempdir.name)
+    s3.upload_file(f"/tmp/{name}.zip", "districtr-exports-dumps", f"{name}.zip")
+    return f"http://districtr-exports-dumps.s3-website-us-east-1.amazonaws.com/{name}.zip"
 
 
 @app.route("/export", methods=["POST"])
@@ -104,7 +103,7 @@ def export(export_format="ESRI Shapefile", full=False):
 
     # The shapefile will default to -1 if unassigned
     idColumn = plan["idColumn"]["key"]
-    shp["districtr"] = shp[idColumn].apply(lambda x: assignment.get(x, -1)).astype("uint8")
+    shp["districtr"] = shp[idColumn].apply(lambda x: assignment.get(x, -1)).astype("int32")
 
     filename = plan["id"] + "-export"
     if export_format.lower() == "geojson":
@@ -118,11 +117,11 @@ def export(export_format="ESRI Shapefile", full=False):
         ending = ".shp"
 
     if full:
-        return create_export(shp, filename, ending=ending, driver=driver)
+        return create_export(shp, filename+ending, ending=ending, driver=driver)
     else:
         return create_export(
             shp[[idColumn, "districtr", "geometry"]],
-            filename,
+            filename+ending,
             ending=ending,
             driver=driver,
         )
