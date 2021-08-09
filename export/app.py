@@ -7,10 +7,12 @@ import boto3
 from flask import request
 import flask
 import botocore.exceptions
-from flask_cors import CORS
+import pandas as pd
+from flask_cors import CORS, cross_origin
 
 app = flask.Flask(__name__)
 CORS(app)
+app.config['Access-Control-Allow-Origin'] = '*'
 
 
 s3 = boto3.client("s3")
@@ -23,6 +25,7 @@ def generate_shapefile_uri(plan: dict) -> str:
     """
     with open("config.json") as f:
         config = json.loads("".join([x.split("#")[0] for x in f]))
+
 
     state = plan["placeId"]
     shapefile_code = state
@@ -75,7 +78,9 @@ def create_export(
     tempdir = tempfile.TemporaryDirectory()
     shp.to_file(f"{tempdir.name}/{name}{ending}", driver=driver)
     shp_archive = shutil.make_archive(f"/tmp/{name}", "zip", tempdir.name)
-    return flask.send_file(shp_archive, as_attachment=True)
+    return flask.send_from_directory("/tmp", f"{name}.zip")
+    # shp_archive = shutil.make_archive(f"/tmp/{name}", "zip", tempdir.name)
+    # return flask.send_from_directory("/tmp", f"{name}.zip")
 
 
 @app.route("/export", methods=["POST"])
@@ -99,7 +104,7 @@ def export(export_format="ESRI Shapefile", full=False):
 
     # The shapefile will default to -1 if unassigned
     idColumn = plan["idColumn"]["key"]
-    shp["districtr"] = shp[idColumn].apply(lambda x: assignment.get(x, -1))
+    shp["districtr"] = shp[idColumn].apply(lambda x: assignment.get(x, -1)).astype("uint8")
 
     filename = plan["id"] + "-export"
     if export_format.lower() == "geojson":
