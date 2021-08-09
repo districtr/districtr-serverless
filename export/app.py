@@ -7,8 +7,10 @@ import boto3
 from flask import request
 import flask
 import botocore.exceptions
+from flask_cors import CORS
 
 app = flask.Flask(__name__)
+CORS(app)
 
 
 s3 = boto3.client("s3")
