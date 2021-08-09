@@ -1,6 +1,7 @@
 import json
 import tempfile
 import os
+import hashlib
 import shutil
 import geopandas as gpd
 import boto3
@@ -8,6 +9,7 @@ from flask import request
 import flask
 import botocore.exceptions
 import pandas as pd
+import requests
 from flask_cors import CORS, cross_origin
 
 app = flask.Flask(__name__)
@@ -17,6 +19,7 @@ app.config['Access-Control-Allow-Origin'] = '*'
 
 s3 = boto3.client("s3")
 session = boto3.Session()
+BASE_URL = "https://d3axno55psi0h1.cloudfront.net"
 
 
 def generate_shapefile_uri(plan: dict) -> str:
@@ -70,16 +73,16 @@ def fetch_shapefile(shapefile_uri: str, dir_prefix="/tmp/"):
 
 
 def create_export(
-    shp: gpd.GeoDataFrame, name: str, ending=".shp", driver="ESRI Shapefile"
+    shp: gpd.GeoDataFrame, filename: str, ending=".shp", driver="ESRI Shapefile"
 ):
     """
     Creates shapefile export from GeoDataFrame
     """
     tempdir = tempfile.TemporaryDirectory()
-    shp.to_file(f"{tempdir.name}/{name}{ending}", driver=driver)
-    shp_archive = shutil.make_archive(f"/tmp/{name}", "zip", tempdir.name)
-    s3.upload_file(f"/tmp/{name}.zip", "districtr-exports-dumps", f"{name}.zip")
-    return f"http://districtr-exports-dumps.s3-website-us-east-1.amazonaws.com/{name}.zip"
+    shp.to_file(f"{tempdir.name}/{filename}{ending}", driver=driver)
+    shp_archive = shutil.make_archive(f"/tmp/{filename}", "zip", tempdir.name)
+    s3.upload_file(f"/tmp/{filename}.zip", "districtr-exports-dumps", f"{filename}.zip")
+    return f"{BASE_URL}/{filename}.zip"
 
 
 @app.route("/export", methods=["POST"])
@@ -91,6 +94,24 @@ def export(export_format="ESRI Shapefile", full=False):
     """
     plan = request.get_json()
     coi_mode = ("type" in plan["problem"]) and (plan["problem"]["type"] == "community")
+
+    if export_format.lower() == "geojson":
+        driver = "GeoJSON"
+        ending = ".geojson"
+    elif export_format.lower() == "gpkg":
+        driver = "GPKG"
+        ending = ".gpkg"
+    else:
+        driver = "ESRI Shapefile"
+        ending = ".shp"
+
+    hash_plan = hashlib.sha256(str(plan).encode()).hexdigest()
+    filename = plan["id"] + "-export-" + hash_plan[0:12] + ending
+
+    url = f"{BASE_URL}/{filename}.zip"
+    print(url, requests.get(url).status_code)
+    if requests.get(url).status_code == 200:
+        return url
 
     shapefile_uri = generate_shapefile_uri(plan)
     shp = fetch_shapefile(shapefile_uri)
@@ -105,23 +126,12 @@ def export(export_format="ESRI Shapefile", full=False):
     idColumn = plan["idColumn"]["key"]
     shp["districtr"] = shp[idColumn].apply(lambda x: assignment.get(x, -1)).astype("int32")
 
-    filename = plan["id"] + "-export"
-    if export_format.lower() == "geojson":
-        driver = "GeoJSON"
-        ending = ".geojson"
-    elif export_format.lower() == "gpkg":
-        driver = "GPKG"
-        ending = ".gpkg"
-    else:
-        driver = "ESRI Shapefile"
-        ending = ".shp"
-
     if full:
-        return create_export(shp, filename+ending, ending=ending, driver=driver)
+        return create_export(shp, filename, ending=ending, driver=driver)
     else:
         return create_export(
             shp[[idColumn, "districtr", "geometry"]],
-            filename+ending,
+            filename,
             ending=ending,
             driver=driver,
         )

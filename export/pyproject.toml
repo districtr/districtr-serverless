@@ -12,6 +12,7 @@ boto3 = "^1.18.16"
 zappa = "^0.53.0"
 troposphere = "2.7.0"
 Flask-Cors = "^3.0.10"
+requests = "^2.26.0"
 
 [tool.poetry.dev-dependencies]
 

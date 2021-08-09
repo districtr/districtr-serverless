@@ -581,7 +581,7 @@ wsgi-request-logger = "*"
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.8"
-content-hash = "82264ad4996a470e11fa319fff9c093cbd8fab0044866a9b9585efa72c12b3a9"
+content-hash = "51b2550f12b748cb9c759a196f2fca310b554430efa24ecf77a85df90ab09d26"
 
 [metadata.files]
 argcomplete = [
