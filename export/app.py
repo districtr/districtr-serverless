@@ -82,12 +82,12 @@ def create_export(
     shp.to_file(f"{tempdir.name}/{filename}{ending}", driver=driver)
     shp_archive = shutil.make_archive(f"/tmp/{filename}", "zip", tempdir.name)
     s3.upload_file(f"/tmp/{filename}.zip", "districtr-exports-dumps", f"{filename}.zip")
-    return f"{BASE_URL}/{filename}.zip"
+    return flask.redirect(f"{BASE_URL}/{filename}.zip")
 
 
-@app.route("/export", methods=["POST"])
-@app.route("/export/<export_format>", methods=["POST"])
-@app.route("/export/<export_format>/<full>", methods=["POST"])
+@app.route("/export", methods=["POST", "GET"])
+@app.route("/export/<export_format>", methods=["POST", "GET"])
+@app.route("/export/<export_format>/<full>", methods=["POST", "GET"])
 def export(export_format="ESRI Shapefile", full=False):
     """
     Exports a districtr json object using the specified driver
@@ -111,7 +111,7 @@ def export(export_format="ESRI Shapefile", full=False):
     url = f"{BASE_URL}/{filename}.zip"
     print(url, requests.get(url).status_code)
     if requests.get(url).status_code == 200:
-        return url
+        return flask.redirect(url)
 
     shapefile_uri = generate_shapefile_uri(plan)
     shp = fetch_shapefile(shapefile_uri)
