@@ -1,0 +1,66 @@
+{   "cvap_col": {"2008":"CVAP14", "2013":"CVAP14","2014":"CVAP14","2016":"CVAP16","2017":"CVAP17",
+                 "2018":"CVAP18"},
+    "minorities": {
+        "Black": {
+            "cvap_col": {"2008":"BCVAP14", "2013":"BCVAP14","2014":"BCVAP14","2016":"BCVAP16",
+                         "2017":"BCVAP17","2018":"BCVAP18"},
+            "logit_params": null
+        }
+    },
+    "local_elections": [
+        {
+            "name": "CONG18",
+            "year": 2018,
+            "cands": ["CONG18_APressley","CONG18_MCapuano"],
+            "coc": {"Black": "CONG18_APressley"}
+        },
+        {
+            "name": "BMAY17",
+            "year": 2017,
+            "cands": ["MAY17_Jackson","MAY17_Walsh"],
+            "coc": {"Black": "MAY17_Jackson"}
+        },
+        {
+            "name": "SS08",
+            "year": 2008,
+            "cands": ["SS08_SChangDiaz","SS08DWilkerson"],
+            "coc": {"Black": "SS08DWilkerson"}
+        },
+        {
+            "name": "SS13",
+            "year": 2013,
+            "cands": ["SS13_LForry","SS13_NCollins"],
+            "coc": {"Black": "SS13_LForry"}
+        },
+        {
+            "name": "SH18",
+            "year": 2018,
+            "cands": ["SH18_EMalia","SH18_CClemonsMuhammad"],
+            "coc": {"Black": "SH18_CClemonsMuhammad"}
+        },
+        {
+            "name": "SH18",
+            "year": 2018,
+            "cands": ["SH18_DCullinane","SH18_JLacet"],
+            "coc": {"Black": "SH18_JLacet"}
+        },
+        {
+            "name": "SH18",
+            "year": 2018,
+            "cands": ["SH18_AScaccia", "SH18_SIdowu"],
+            "coc": {"Black": "SH18_SIdowu"}
+        },
+        {
+            "name": "SH16",
+            "year": 2016,
+            "cands": ["SH16_EMalia","SH16_CClemons"],
+            "coc": {"Black": "SH16_CClemons"}
+        },
+        {
+            "name": "SH16",
+            "year": 2016,
+            "cands": ["SH16_DCullinane","SH16_JLacet"],
+            "coc": {"Black": "SH16_JLacet"}
+        }
+    ]
+}
