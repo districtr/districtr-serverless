@@ -8,7 +8,8 @@
         "s3_bucket": "districtr-exports",
 	"timeout_seconds": 900,
 	"memory_size": 900,
-	"slim_handler": true
+	"slim_handler": true, 
+	"keep_warm": false
     },
     "production": {
         "app_function": "app.app",
@@ -19,6 +20,7 @@
         "s3_bucket": "districtr-exports",
 	"timeout_seconds": 900,
 	"memory_size": 900,
-	"slim_handler": true
+	"slim_handler": true,
+	"keep_warm": false
     }
 }
