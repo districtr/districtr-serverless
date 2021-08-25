@@ -6,12 +6,14 @@ Given a set of unit ids that make up a district return the coordinate point (lon
 
 * `/districtCenter`: subfolder containing python code / dependencies for AWS Lambda function districtCenter. (described above)
     * `/districtCenter/package`: zips of dependecies for lambda function.
-* `/districtCenterDataPrep`: subfolder containing python scripts used to generate CSVs in `/districtCenter/resources/` folder.
+* `/districtCenterDataPrep`: subfolder containing python scripts used to generate CSVs to be uploaded in `s3://districtr/centroids` bucket.
 
 
 ### What places/units are included
 
-* Blockgroups - All states
+* Blockgroups 2010 - All states
+* Blockgroups 2020 - All states
+* VTDs 2020 - All state
 * Counties
     * Iowa
 * Precincts
