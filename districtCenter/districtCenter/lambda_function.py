@@ -1,9 +1,9 @@
 import json
 import pandas as pd
 import numpy as np
-# import boto3
+import boto3
 
-# s3 = boto3.client('s3')
+s3 = boto3.client('s3')
 
 
 def district_center_point(district, place_centroids):
@@ -15,20 +15,19 @@ def district_center_point(district, place_centroids):
     
 
 def lambda_handler(event, context):
-    # TODO implement
     
     if 'body' in event.keys():
         event = json.loads(event["body"])
-    # bucket = "districtr"
+    bucket = "districtr"
     state = event["state"].lower().replace(" ", "_")
     units = event["units"].lower().replace(" ", "")
     district = event["dist_id"]
     district_nodes = event["assignment"]
-    # key = "block_assign/{}_{}.json".format(state, units)
+    key = "centroids/{}_{}.csv".format(state, units)
 
     try:
-        # data = s3.get_object(Bucket=bucket, Key=key)
-        unit_centroids = pd.read_csv("resources/{}_{}.csv".format(state, units), dtype={"GEOID": str}).set_index("GEOID")
+        data = s3.get_object(Bucket=bucket, Key=key)
+        unit_centroids = pd.read_csv(data['Body'], dtype={"GEOID": str}).set_index("GEOID")
         center_point = district_center_point(district_nodes, unit_centroids)
         return {
             'statusCode': 200,

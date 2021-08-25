@@ -1,0 +1,26 @@
+{
+    "dev": {
+        "app_function": "app.app",
+        "aws_region": "us-east-1",
+        "profile_name": "mggg",
+        "project_name": "districtr-export",
+        "runtime": "python3.8",
+        "s3_bucket": "districtr-exports",
+	"timeout_seconds": 900,
+	"memory_size": 900,
+	"slim_handler": true, 
+	"keep_warm": false
+    },
+    "production": {
+        "app_function": "app.app",
+        "aws_region": "us-east-1",
+        "profile_name": "mggg",
+        "project_name": "districtr-export",
+        "runtime": "python3.8",
+        "s3_bucket": "districtr-exports",
+	"timeout_seconds": 900,
+	"memory_size": 900,
+	"slim_handler": true,
+	"keep_warm": false
+    }
+}
