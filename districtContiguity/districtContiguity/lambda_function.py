@@ -19,8 +19,8 @@ def lambda_handler(event, context):
     state = event["state"].lower().replace(" ", "_")
     units = event["units"].lower().replace(" ", "")
     # district = event["dist_id"]
-    plan_assingment = event["assignment"]
-    parts = set(plan_assingment.values())
+    plan_assignment = event["assignment"]
+    parts = set(plan_assignment.values())
     key = "dual_graphs/{}_{}.json".format(state, units)
 
     try:
@@ -29,7 +29,7 @@ def lambda_handler(event, context):
         return {
             'statusCode': 200,
             'body': json.dumps({
-                        part: district_contiguity([n for n, p in plan_assingment.items() if p == part],
+                        part: district_contiguity([n for n, p in plan_assignment.items() if p == part],
                                                   graph)
                         for part in parts}),
         }
