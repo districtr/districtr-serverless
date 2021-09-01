@@ -51,3 +51,27 @@ pd.merge(df, ma_pop, on="NAME", how="outer").to_csv("../localElectionDetails/res
 ma_full[["NAME", "VAP", "BVAP"]].rename(columns={"VAP": "VAP10", "BVAP": "BVAP10"})
 
 pd.merge(df, ma_full[["NAME", "VAP", "BVAP"]], on="NAME", how="outer").to_csv("../localElectionDetails/resources/massachusetts.csv", index=False)
+
+df = pd.read_csv("../localElectionDetails/resources/massachusetts.csv")
+
+df_old = pd.read_csv("../localElectionDetails/resources/massachusetts_old.csv")
+
+# df_old[["NAME", "TOTPOP"]]
+
+# pd.merge(df, df_old[["NAME", "TOTPOP"]], on="NAME").drop(columns=["Unnamed: 0"]).to_csv("../localElectionDetails/resources/massachusetts.csv", index=False)
+
+cols = ["NAME", "TOTPOP","VAP10","HVAP10","WVAP10","BVAP10","AMINVAP10","ASIANVAP10","NHPIVAP10","OTHERVAP10","2MOREVAP10"]
+
+df = df.drop(columns=[c for c in df.columns if "CVAP" in c])
+
+df_cvap = df_old[["NAME"] + [c for c in df_old.columns if "CVAP" in c]]
+
+pd.merge(df, df_cvap, on="NAME").to_csv("../localElectionDetails/resources/massachusetts.csv", index=False)
+
+
+
+df = pd.read_csv("~/Downloads/WI25.csv", header=0)
+
+df["assignment"] = df["assignment"].apply(lambda x: x+1)
+
+df.to_csv("~/Downloads/WI25.csv", index=False)
