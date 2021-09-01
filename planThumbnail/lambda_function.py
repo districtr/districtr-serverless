@@ -1,6 +1,7 @@
 import base64
 import io
 import os
+import json
 
 import boto3
 import geopandas as gpd
@@ -56,6 +57,8 @@ def coloration(row, id_column_key, assignment):
         return cs_bright[0]
 
 def lambda_handler(event, context):
+    if 'body' in event.keys():
+        event = json.loads(event["body"])
     origin = event['id']
     p = mdb.plans.find_one({ 'simple_id': int(origin) })
     if p is None:
@@ -107,5 +110,3 @@ def lambda_handler(event, context):
     except Exception as e:
         print(e)
         raise e
-    
-    
