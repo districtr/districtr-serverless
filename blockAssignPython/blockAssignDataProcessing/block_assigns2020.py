@@ -60,3 +60,20 @@ for code, st in STATES.items():
             json.dump(mappings, fout, indent=2)
     except:
         print("No VTDs found")
+
+
+gdf = gpd.read_file("/Users/jnmatthews/Downloads/nm-precincts-main/nm_precincts.shp")
+gdf = gdf.set_index("VTDID")
+
+
+blks = pd.read_csv("/Users/jnmatthews/Downloads/nm-precincts-main/NM VTD Block Assign FINAL 20210812.csv")
+
+mappings = {gdf.loc[vtd].GEOID20: [] for vtd in blks["VTDID"].unique()}
+
+for i, row in blks.iterrows():
+    vtd = row["VTDID"]
+    blocks = mappings[gdf.loc[vtd].GEOID20]
+    blocks.append(str(row.Block))
+
+with open("block_lists/{}_precincts.json".format("new_mexico"), "w") as fout:
+            json.dump(mappings, fout, indent=2)
