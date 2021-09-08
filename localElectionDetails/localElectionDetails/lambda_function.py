@@ -1,8 +1,6 @@
 import json
 import pandas as pd
 
-# import boto3
-
 
 def get_district_details(dist_asignment, group, state_details, ei_data, other_col="Other"):
     elections = []
