@@ -24,7 +24,7 @@ def lambda_handler(event, context):
     try:
         data = s3.get_object(Bucket=bucket, Key=key)
         graph = json_graph.adjacency_graph(json.load(data['Body']))
-        graph.remove_nodes(assigned_units)
+        graph.remove_nodes_from(assigned_units)
         return {
             'statusCode': 200,
             'body': json.dumps({
