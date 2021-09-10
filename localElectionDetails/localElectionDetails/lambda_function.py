@@ -17,6 +17,7 @@ def get_district_details(dist_asignment, group, state_details, ei_data, other_co
         coc_support = dist_asignment[coc].sum()
         tot_turout = dist_asignment[cands].sum().sum()
         tot_pop = dist_asignment["TOTPOP"].sum()
+        tot_cvap = dist_asignment[cvap_col].sum()
         outside_elect_terrain = dist_asignment[dist_asignment[coc].isna()]
         outside_elect_terrain_group_vap = outside_elect_terrain[group_vap_col].sum()
         outside_elect_terrain_total_vap = outside_elect_terrain[vap_col].sum()
@@ -30,8 +31,8 @@ def get_district_details(dist_asignment, group, state_details, ei_data, other_co
             "Name": name,
             "CoC": coc,
             "CoCPerc": coc_support / tot_turout if coc_support != 0 else 0,
-            "GroupControl": dist_asignment[group_cvap_col].sum() / dist_asignment[cvap_col].sum(),
-            "ElectionOverlap": dist_asignment.dropna(subset=[coc])["TOTPOP"].sum() / tot_pop,
+            "GroupControl": dist_asignment[group_cvap_col].sum() / tot_cvap if tot_cvap != 0 else 0,
+            "ElectionOverlap": dist_asignment.dropna(subset=[coc])["TOTPOP"].sum() / tot_pop if tot_pop != 0 else 0,
             "ProjectedCoCPerc": (coc_support + coc_proj_vote) / (tot_turout + total_proj_vote) if tot_pop != 0 else 0
         }
         elections.append(elect)
