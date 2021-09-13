@@ -1,6 +1,7 @@
 import json
 import statistics
 import networkx as nx
+from networkx.readwrite import json_graph
 from gerrychain import Graph, GeographicPartition, updaters, metrics
 import boto3
 s3 = boto3.client('s3')
@@ -34,7 +35,7 @@ def plan_evaluation(partition):
             'median': statistics.median(polsbypopper)
         }
         if len(polsbypopper) > 1:
-            polsbypopper_stats['variance'] = polsbypopper.var()
+            polsbypopper_stats['variance'] = statistics.variance(polsbypopper)
     except:
         polsbypopper = []
         polsbypopper_stats = "Polsby Popper unavailable for this geometry."
@@ -128,7 +129,8 @@ def lambda_handler(event, context):
 
     try:
         data = s3.get_object(Bucket=bucket, Key=key)
-        graph = Graph.from_json(data['Body'])
+        g = json_graph.adjacency_graph(json.load(data['Body']))
+        graph = Graph(g)
         assignment = {n: plan_assignment[n] if n in keys else -1 for n in graph.nodes()}
         part = GeographicPartition(graph, assignment)
         return {
@@ -138,4 +140,6 @@ def lambda_handler(event, context):
     
     except Exception as e:
         print(e)
-        raise e
+        return {
+            "error": "This state/units ({}, {}) is not supported".format(event["state"], event["units"])
+        }
