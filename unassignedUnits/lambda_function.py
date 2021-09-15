@@ -16,8 +16,7 @@ def lambda_handler(event, context):
     bucket = "districtr"
     state = event["state"].lower().replace(" ", "_")
     units = event["units"].lower().replace(" ", "")
-    plan_assignment = event["assignment"]
-    assigned_units = set(plan_assignment.keys())
+    assigned_units = set(event["assignment"])
     key = "dual_graphs/{}_{}.json".format(state, units)
     centroid_key = "centroids/{}_{}.csv".format(state, units)
 
