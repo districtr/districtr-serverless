@@ -60,6 +60,7 @@ def lambda_handler(event, context):
     if 'body' in event.keys():
         event = json.loads(event["body"])
     origin = event['id']
+    
     p = mdb.plans.find_one({ 'simple_id': int(origin) })
     if p is None:
         return {
@@ -69,7 +70,7 @@ def lambda_handler(event, context):
     bucket = "districtr"
     plan = p['plan']
     place_id = plan['placeId'] # get the plan id of the Districtr plan
-    unit_id = plan["units"]["id"]
+    unit_id = plan["units"]["id"].replace('vtds20', 'vtd20')
     assignment = plan["assignment"] if "assignment" in plan else {}
     id_column_key = plan["idColumn"]["key"]
     key = "shapefiles/{}_{}.zip".format(place_id,unit_id)
@@ -98,15 +99,21 @@ def lambda_handler(event, context):
         pic_IObytes = io.BytesIO()
         geoplt.figure.savefig(pic_IObytes, format='png')
         pic_IObytes.seek(0)
+        
         pic_hash = str(base64.b64encode(pic_IObytes.read()))
+        mdb.plans.update_one({ 'simple_id': int(origin) }, { '$set': { 'screenshot2': 'data:image/png;base64,' + pic_hash[2:-1] } })
+        
+        #pic_IObytes.seek(0)
+        #s3.put_object(Bucket="districtr-exports", Key=str(origin), ContentType='image/png', Body=pic_IObytes)
 
         plt.close(geoplt.figure)
 
         return {
             'statusCode': 200,
-            'body': pic_hash
+            'body': 'completed'
         }
     
     except Exception as e:
         print(e)
+        print(key)
         raise e
