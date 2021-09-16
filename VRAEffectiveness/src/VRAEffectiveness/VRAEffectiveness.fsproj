@@ -29,6 +29,10 @@
     <None Include="resources/louisiana.csv" CopyToOutputDirectory="PreserveNewest" />
     <None Include="resources/massachusetts.json" CopyToOutputDirectory="PreserveNewest" />
     <None Include="resources/massachusetts.csv" CopyToOutputDirectory="PreserveNewest" />
+    <None Include="resources/massachusetts-2020.json" CopyToOutputDirectory="PreserveNewest" />
+    <None Include="resources/massachusetts-2020.csv" CopyToOutputDirectory="PreserveNewest" />
+    <None Include="resources/maryland.json" CopyToOutputDirectory="PreserveNewest" />
+    <None Include="resources/maryland.csv" CopyToOutputDirectory="PreserveNewest" />
     <Content Include="Readme.md" />
   </ItemGroup>
 </Project>

@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<Project ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup Condition=" '$(ExcludeRestorePackageImports)' != 'true' ">
+    <RestoreSuccess Condition=" '$(RestoreSuccess)' == '' ">True</RestoreSuccess>
+    <RestoreTool Condition=" '$(RestoreTool)' == '' ">NuGet</RestoreTool>
+    <ProjectAssetsFile Condition=" '$(ProjectAssetsFile)' == '' ">$(MSBuildThisFileDirectory)project.assets.json</ProjectAssetsFile>
+    <NuGetPackageRoot Condition=" '$(NuGetPackageRoot)' == '' ">/Users/apizzimenti/.nuget/packages/</NuGetPackageRoot>
+    <NuGetPackageFolders Condition=" '$(NuGetPackageFolders)' == '' ">/Users/apizzimenti/.nuget/packages/</NuGetPackageFolders>
+    <NuGetProjectStyle Condition=" '$(NuGetProjectStyle)' == '' ">PackageReference</NuGetProjectStyle>
+    <NuGetToolVersion Condition=" '$(NuGetToolVersion)' == '' ">5.9.1</NuGetToolVersion>
+  </PropertyGroup>
+  <ItemGroup Condition=" '$(ExcludeRestorePackageImports)' != 'true' ">
+    <SourceRoot Include="/Users/apizzimenti/.nuget/packages/" />
+  </ItemGroup>
+  <PropertyGroup>
+    <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(ExcludeRestorePackageImports)' != 'true' ">
+    <PkgNewtonsoft_Json Condition=" '$(PkgNewtonsoft_Json)' == '' ">/Users/apizzimenti/.nuget/packages/newtonsoft.json/12.0.3</PkgNewtonsoft_Json>
+    <PkgFSharp_Core Condition=" '$(PkgFSharp_Core)' == '' ">/Users/apizzimenti/.nuget/packages/fsharp.core/5.0.0</PkgFSharp_Core>
+    <PkgFSharp_Data Condition=" '$(PkgFSharp_Data)' == '' ">/Users/apizzimenti/.nuget/packages/fsharp.data/4.0.1</PkgFSharp_Data>
+    <PkgDeedle Condition=" '$(PkgDeedle)' == '' ">/Users/apizzimenti/.nuget/packages/deedle/2.3.0</PkgDeedle>
+    <PkgAmazon_Lambda_Core Condition=" '$(PkgAmazon_Lambda_Core)' == '' ">/Users/apizzimenti/.nuget/packages/amazon.lambda.core/1.2.0</PkgAmazon_Lambda_Core>
+    <PkgAmazon_Lambda_Serialization_SystemTextJson Condition=" '$(PkgAmazon_Lambda_Serialization_SystemTextJson)' == '' ">/Users/apizzimenti/.nuget/packages/amazon.lambda.serialization.systemtextjson/2.1.0</PkgAmazon_Lambda_Serialization_SystemTextJson>
+    <PkgAmazon_Lambda_APIGatewayEvents Condition=" '$(PkgAmazon_Lambda_APIGatewayEvents)' == '' ">/Users/apizzimenti/.nuget/packages/amazon.lambda.apigatewayevents/2.4.0</PkgAmazon_Lambda_APIGatewayEvents>
+  </PropertyGroup>
+</Project>

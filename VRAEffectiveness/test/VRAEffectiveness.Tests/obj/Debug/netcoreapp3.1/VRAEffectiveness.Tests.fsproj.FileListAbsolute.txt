@@ -1,0 +1,6 @@
+/Users/apizzimenti/Desktop/districtr-serverless/VRAEffectiveness/test/VRAEffectiveness.Tests/obj/Debug/netcoreapp3.1/VRAEffectiveness.Tests.fsprojAssemblyReference.cache
+/Users/apizzimenti/Desktop/districtr-serverless/VRAEffectiveness/test/VRAEffectiveness.Tests/obj/Debug/netcoreapp3.1/VRAEffectiveness.Tests.AssemblyInfoInputs.cache
+/Users/apizzimenti/Desktop/districtr-serverless/VRAEffectiveness/test/VRAEffectiveness.Tests/obj/Debug/netcoreapp3.1/VRAEffectiveness.Tests.AssemblyInfo.fs
+/Users/apizzimenti/Desktop/mggg/internal/web/districtr-serverless/VRAEffectiveness/test/VRAEffectiveness.Tests/obj/Debug/netcoreapp3.1/VRAEffectiveness.Tests.fsprojAssemblyReference.cache
+/Users/apizzimenti/Desktop/mggg/internal/web/districtr-serverless/VRAEffectiveness/test/VRAEffectiveness.Tests/obj/Debug/netcoreapp3.1/VRAEffectiveness.Tests.AssemblyInfoInputs.cache
+/Users/apizzimenti/Desktop/mggg/internal/web/districtr-serverless/VRAEffectiveness/test/VRAEffectiveness.Tests/obj/Debug/netcoreapp3.1/VRAEffectiveness.Tests.AssemblyInfo.fs

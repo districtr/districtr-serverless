@@ -1,0 +1,107 @@
+{
+  "format": 1,
+  "restore": {
+    "/Users/apizzimenti/Desktop/mggg/internal/web/districtr-serverless/VRAEffectiveness/src/VRAEffectiveness/VRAEffectiveness.fsproj": {}
+  },
+  "projects": {
+    "/Users/apizzimenti/Desktop/mggg/internal/web/districtr-serverless/VRAEffectiveness/src/VRAEffectiveness/VRAEffectiveness.fsproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/Users/apizzimenti/Desktop/mggg/internal/web/districtr-serverless/VRAEffectiveness/src/VRAEffectiveness/VRAEffectiveness.fsproj",
+        "projectName": "VRAEffectiveness",
+        "projectPath": "/Users/apizzimenti/Desktop/mggg/internal/web/districtr-serverless/VRAEffectiveness/src/VRAEffectiveness/VRAEffectiveness.fsproj",
+        "packagesPath": "/Users/apizzimenti/.nuget/packages/",
+        "outputPath": "/Users/apizzimenti/Desktop/mggg/internal/web/districtr-serverless/VRAEffectiveness/src/VRAEffectiveness/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/Users/apizzimenti/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp3.1"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp3.1": {
+            "targetAlias": "netcoreapp3.1",
+            "projectReferences": {}
+          }
+        }
+      },
+      "frameworks": {
+        "netcoreapp3.1": {
+          "targetAlias": "netcoreapp3.1",
+          "dependencies": {
+            "Amazon.Lambda.APIGatewayEvents": {
+              "target": "Package",
+              "version": "[2.4.0, )",
+              "generatePathProperty": true
+            },
+            "Amazon.Lambda.Core": {
+              "target": "Package",
+              "version": "[1.2.0, )",
+              "generatePathProperty": true
+            },
+            "Amazon.Lambda.Serialization.SystemTextJson": {
+              "target": "Package",
+              "version": "[2.1.0, )",
+              "generatePathProperty": true
+            },
+            "Deedle": {
+              "target": "Package",
+              "version": "[2.3.0, )",
+              "generatePathProperty": true
+            },
+            "FSharp.Core": {
+              "target": "Package",
+              "version": "[5.0.0, )",
+              "generatePathProperty": true
+            },
+            "FSharp.Data": {
+              "target": "Package",
+              "version": "[4.0.1, )",
+              "generatePathProperty": true
+            },
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[12.0.3, )",
+              "generatePathProperty": true
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.AspNetCore.App.Ref",
+              "version": "[3.1.10, 3.1.10]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Ref",
+              "version": "[3.1.0, 3.1.0]"
+            }
+          ],
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/local/Cellar/dotnet/5.0.206/libexec/sdk/5.0.206/RuntimeIdentifierGraph.json"
+        }
+      },
+      "runtimes": {
+        "linux-x64": {
+          "#import": []
+        }
+      }
+    }
+  }
+}

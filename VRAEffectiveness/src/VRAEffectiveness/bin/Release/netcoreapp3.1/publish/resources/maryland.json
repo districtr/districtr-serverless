@@ -1,0 +1,249 @@
+{
+    "alignment_year": 2018,
+    "cvap_col": {"2012":"VAP", "2014":"VAP", "2016":"VAP", "2018":"VAP"},
+    "minorities": {
+        "Black": {
+            "cvap_col": {"2012":"BVAP", "2014":"BVAP", "2016":"BVAP", "2018":"BVAP"},
+            "logit_params": null
+        }
+    },
+    "election_groups": [
+        {
+            "name": "SEN12",
+            "year": 2012,
+            "score": {
+                "Black": 0.2102241038
+            },
+            "primary_cands": ["SEN12D"],
+            "primary_coc": {
+                "Black": "SEN12D"
+            },
+            "runoff_cands": null,
+            "runoff_coc": null,
+            "general_cands": [
+                "SEN12D",
+                "SEN12R"
+            ],
+            "general_coc": {
+                "Black": "SEN12D"
+            }
+        },
+        {
+            "name": "PRES12",
+            "year": 2012,
+            "score": {
+                "Black": 0.2973017788
+            },
+            "primary_cands": ["PRES12D"],
+            "primary_coc": {
+                "Black": "PRES12D"
+            },
+            "runoff_cands": null,
+            "runoff_coc": null,
+            "general_cands": [
+                "PRES12D",
+                "PRES12R"
+            ],
+            "general_coc": {
+                "Black": "PRES12D"
+            }
+        },
+        {
+            "name": "PRES16",
+            "year": 2016,
+            "score": {
+                "Black": 0.4204482076
+            },
+            "primary_cands": ["PRES16D"],
+            "primary_coc": {
+                "Black": "PRES16D"
+            },
+            "runoff_cands": null,
+            "runoff_coc": null,
+            "general_cands": [
+                "PRES16D",
+                "PRES16R"
+            ],
+            "general_coc": {
+                "Black": "PRES16D"
+            }
+        },
+        {
+            "name": "GOV14",
+            "year": 2014,
+            "score": {
+                "Black": 0.2973017788
+            },
+            "primary_cands": [
+                "GOV14PD_AB",
+                "GOV14PD_DG",
+                "GOV14PD_HM"
+            ],
+            "primary_coc": {
+                "Black": "GOV14PD_AB"
+            },
+            "runoff_cands": null,
+            "runoff_coc": null,
+            "general_cands": [
+                "GOV14D",
+                "GOV14R"
+            ],
+            "general_coc": {
+                "Black": "GOV14D"
+            }
+        },
+        {
+            "name": "AG14",
+            "year": 2014,
+            "score": {
+                "Black": 0.2973017788
+            },
+            "primary_cands": [
+                "AG14PD_BFR",
+                "AG14PD_ABR",
+                "AG14PD_JCA"
+            ],
+            "primary_coc": {
+                "Black": "AG14PD_ABR"
+            },
+            "runoff_cands": null,
+            "runoff_coc": null,
+            "general_cands": [
+                "AG14D",
+                "AG14R"
+            ],
+            "general_coc": {
+                "Black": "AG14D"
+            }
+        },
+        {
+            "name": "COMP14",
+            "year": 2014,
+            "score": {
+                "Black": 0.2973017788
+            },
+            "primary_cands": ["COMP14D"],
+            "primary_coc": {
+                "Black": "COMP14D"
+            },
+            "runoff_cands": null,
+            "runoff_coc": null,
+            "general_cands": [
+                "COMP14R",
+                "COMP14D"
+            ],
+            "general_coc": {
+                "Black": "COMP14D"
+            }
+        },
+        {
+            "name": "SEN16",
+            "year": 2016,
+            "score": {
+                "Black": 0.4204482076
+            },
+            "primary_cands": [
+                "SEN16PD_DE",
+                "SEN16PD_CV"
+            ],
+            "primary_coc": {
+                "Black": "SEN16PD_DE"
+            },
+            "runoff_cands": null,
+            "runoff_coc": null,
+            "general_cands": [
+                "SEN16D",
+                "SEN16R"
+            ],
+            "general_coc": {
+                "Black": "SEN16D"
+            }
+        },
+        {
+            "name": "GOV18",
+            "year": 2018,
+            "score": {
+                "Black": 0.5946035575
+            },
+            "primary_cands": [
+                "GOV18PD_BJ",
+                "GOV18PD_JS",
+                "GOV18PD_KV",
+                "GOV18PD_RM",
+                "GOV18PD_RB"
+            ],
+            "primary_coc": {
+                "Black": "GOV18PD_BJ"
+            },
+            "runoff_cands": null,
+            "runoff_coc": null,
+            "general_cands": [
+                "GOV18D",
+                "GOV18R"
+            ],
+            "general_coc": {
+                "Black": "GOV18D"
+            }
+        },
+        {
+            "name": "SEN18",
+            "year": 2018,
+            "score": {
+                "Black": 0.5946035575
+            },
+            "primary_cands": ["SEN18D"],
+            "primary_coc": {
+                "Black": "SEN18D"
+            },
+            "runoff_cands": null,
+            "runoff_coc": null,
+            "general_cands": [
+                "SEN18D",
+                "SEN18R"
+            ],
+            "general_coc": {
+                "Black": "SEN18D"
+            }
+        },
+        {
+            "name": "AG18",
+            "year": 2018,
+            "score": {
+                "Black": 0.5946035575
+            },
+            "primary_cands": ["AG18D"],
+            "primary_coc": {
+                "Black": "AG18D"
+            },
+            "runoff_cands": null,
+            "runoff_coc": null,
+            "general_cands": [
+                "AG18D",
+                "AG18R"
+            ],
+            "general_coc": {
+                "Black": "AG18D"
+            }
+        },
+        {
+            "name": "COMP18",
+            "year": 2018,
+            "score": {
+                "Black": 0.5946035575
+            },
+            "primary_cands": ["COMP18D"],
+            "primary_coc": {
+                "Black": "COMP18D"
+            },
+            "runoff_cands": null,
+            "runoff_coc": null,
+            "general_cands": [
+                "COMP18D",
+                "COMP18R"
+            ],
+            "general_coc": {
+                "Black": "COMP18D"
+            }
+        }
+    ]
+}

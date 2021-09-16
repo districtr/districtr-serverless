@@ -1,0 +1,18 @@
+{
+  "version": 2,
+  "dgSpecHash": "hgnJ6LrzggiUpOCSUVBp5GazVmn+ROaKfeWga7kW3PW0CzcH+R6pmqMzLoIZ5O2PcHY9jT7pxoNXlM4bo8aVPQ==",
+  "success": true,
+  "projectFilePath": "/Users/apizzimenti/Desktop/mggg/internal/web/districtr-serverless/VRAEffectiveness/src/VRAEffectiveness/VRAEffectiveness.fsproj",
+  "expectedPackageFiles": [
+    "/Users/apizzimenti/.nuget/packages/amazon.lambda.apigatewayevents/2.4.0/amazon.lambda.apigatewayevents.2.4.0.nupkg.sha512",
+    "/Users/apizzimenti/.nuget/packages/amazon.lambda.core/1.2.0/amazon.lambda.core.1.2.0.nupkg.sha512",
+    "/Users/apizzimenti/.nuget/packages/amazon.lambda.serialization.systemtextjson/2.1.0/amazon.lambda.serialization.systemtextjson.2.1.0.nupkg.sha512",
+    "/Users/apizzimenti/.nuget/packages/deedle/2.3.0/deedle.2.3.0.nupkg.sha512",
+    "/Users/apizzimenti/.nuget/packages/fsharp.core/5.0.0/fsharp.core.5.0.0.nupkg.sha512",
+    "/Users/apizzimenti/.nuget/packages/fsharp.data/4.0.1/fsharp.data.4.0.1.nupkg.sha512",
+    "/Users/apizzimenti/.nuget/packages/newtonsoft.json/12.0.3/newtonsoft.json.12.0.3.nupkg.sha512",
+    "/Users/apizzimenti/.nuget/packages/microsoft.netcore.app.ref/3.1.0/microsoft.netcore.app.ref.3.1.0.nupkg.sha512",
+    "/Users/apizzimenti/.nuget/packages/microsoft.aspnetcore.app.ref/3.1.10/microsoft.aspnetcore.app.ref.3.1.10.nupkg.sha512"
+  ],
+  "logs": []
+}

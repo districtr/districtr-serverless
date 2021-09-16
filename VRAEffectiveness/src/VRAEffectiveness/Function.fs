@@ -25,7 +25,9 @@ type Function() =
 
     let StateSuccessFunction: Map<string, SuccessFunction<string>> = Map.ofArray [|"texas", CoCCarriesElectTX; 
                                                                                    "louisiana", CoCCarriesElectLA;
-                                                                                   "massachusetts", CoCCarriesElectPlurality|]
+                                                                                   "massachusetts", CoCCarriesElectPlurality;
+                                                                                   "massachusetts-2020", CoCCarriesElectPlurality;
+                                                                                   "maryland", CoCCarriesElectPlurality|]
 
     let StateAlignmentOptions: Map<string, AlignmentFunction<string>> = Map.ofArray [|"None", EmptyAlignment; "CVAP", AlignmentCVAP|]
 
