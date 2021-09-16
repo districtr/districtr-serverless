@@ -19,3 +19,4 @@ local/regional elections.
 
 * VRA Dashboard modules
     * Massachusetts
+    * Massachusetts (2020 VTDs)
