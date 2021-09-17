@@ -16,7 +16,15 @@ def get_district_details(dist_asignment, group, state_details, ei_data, other_co
         
         coc_support = dist_asignment[coc].sum()
         tot_turout = dist_asignment[cands].sum().sum()
-        tot_pop = dist_asignment["TOTPOP"].sum()
+        
+        # For 2020 elections, we have a TOTPOP20 column.
+        try:
+            pop_key = "TOTPOP"
+            tot_pop = dist_asignment[pop_key].sum()
+        except:
+            pop_key = "TOTPOP20"
+            tot_pop = dist_asignment[pop_key].sum()
+            
         outside_elect_terrain = dist_asignment[dist_asignment[coc].isna()]
         outside_elect_terrain_group_vap = outside_elect_terrain[group_vap_col].sum()
         outside_elect_terrain_total_vap = outside_elect_terrain[vap_col].sum()
@@ -25,14 +33,18 @@ def get_district_details(dist_asignment, group, state_details, ei_data, other_co
         coc_proj_vote = ei_data[coc][group] * outside_elect_terrain_group_vap + ei_data[coc][other_col] * outside_elect_terrain_non_group_vap
         proj_turout = ei_data[cands].sum(axis=1)
         total_proj_vote = proj_turout[group] * outside_elect_terrain_group_vap + proj_turout[other_col] * outside_elect_terrain_non_group_vap
+        
+        # Calculate supports.
+        cocperc = coc_support/tot_turout if coc_support != 0 else 0
+        projectedcocperc = (coc_support+coc_proj_vote) / (tot_turout+total_proj_vote) if (tot_turout+total_proj_vote)!=0 else 0
 
         elect = {
             "Name": name,
             "CoC": coc,
-            "CoCPerc": coc_support / tot_turout if coc_support != 0 else 0,
+            "CoCPerc": cocperc,
             "GroupControl": dist_asignment[group_cvap_col].sum() / dist_asignment[cvap_col].sum(),
-            "ElectionOverlap": dist_asignment.dropna(subset=[coc])["TOTPOP"].sum() / tot_pop,
-            "ProjectedCoCPerc": (coc_support + coc_proj_vote) / (tot_turout + total_proj_vote) if tot_pop != 0 else 0
+            "ElectionOverlap": dist_asignment.dropna(subset=[coc])[pop_key].sum() / tot_pop,
+            "ProjectedCoCPerc": projectedcocperc
         }
         elections.append(elect)
 

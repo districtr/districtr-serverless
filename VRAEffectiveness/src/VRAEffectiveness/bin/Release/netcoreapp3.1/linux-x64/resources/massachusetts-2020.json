@@ -124,6 +124,19 @@
                            "Asian": "GOV18GJGONZALEZ"}
         },
         {
+            "name": "SOC18",
+            "year": 2018,
+            "score": {"Black": 0.3535, "Hispanic": 0.3535, "Asian": 0.35332325},
+            "primary_cands": ["SOC18PWGALVIN","SOC18PJZAKIM"],
+            "primary_coc": {"Black": "SOC18PWGALVIN", "Hispanic": "SOC18PWGALVIN", 
+                            "Asian": "SOC18PJZAKIM"},
+            "runoff_cands": null,
+            "runoff_coc": null,
+            "general_cands": ["SOC18GWGALVIN","SOC18GAAMORE"],
+            "general_coc":{"Black": "SOC18GWGALVIN", "Hispanic": "SOC18GWGALVIN",
+                           "Asian": "SOC18GWGALVIN"}
+        },
+        {
             "name": "PRES20",
             "year": 2020,
             "score": {"Black": 0.5, "Hispanic": 0.5, "Asian": 0.5},
