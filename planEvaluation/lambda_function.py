@@ -1,107 +1,42 @@
 import json
-import statistics
-import networkx as nx
 from networkx.readwrite import json_graph
-from gerrychain import Graph, GeographicPartition, updaters, metrics
+from gerrychain import Graph, GeographicPartition
+
+from plan_metrics import *
 import boto3
 s3 = boto3.client('s3')
 
-def plan_evaluation(partition):
-    graph = partition.graph
-
-    # Naming constants
-    county_column = "COUNTY"
-    municipality_column = "TOWN"
+def plan_evaluation(graph, districtr_assignment, county_pops, elections):
+    keys = set(districtr_assignment.keys())
+    parts = set(districtr_assignment.values())
+    assignment = {n: districtr_assignment[n] if n in keys else -1 for n in graph.nodes()}
+    partition = GeographicPartition(graph, assignment)
 
     # Contiguity
-    split_districts = []
-    for district in partition.parts.keys():
-        if district != -1:
-            part_contiguous = nx.is_connected(partition.subgraphs[district])
-            if not part_contiguous:
-                split_districts.append(district)
-    contiguity = (len(split_districts) == 0)
+    split_districts = [part for part in parts if district_contiguity([n for n, p in districtr_assignment.items() if p == part], graph)]
+    contiguity = (split_districts == [])
 
     # Calculate cut edges
     cut_edges = updaters.cut_edges(partition)
 
     # Polsby Popper
     try:
-        polsbypopper = [v for _k, v in metrics.polsby_popper(partition).items()]
-        polsbypopper_stats = {
-            'max': max(polsbypopper),
-            'min': min(polsbypopper),
-            'mean': statistics.mean(polsbypopper),
-            'median': statistics.median(polsbypopper)
-        }
-        if len(polsbypopper) > 1:
-            polsbypopper_stats['variance'] = statistics.variance(polsbypopper)
+        polsbypopper, polsbypopper_stats = polsby_popper(partition)
     except:
         polsbypopper = []
         polsbypopper_stats = "Polsby Popper unavailable for this geometry."
 
-    
     # county splits
-
     try:
-        county_splits = updaters.county_splits("county_splits", county_column)(partition)
-        county_response = {}
-        counties = set([graph.nodes[n][county_column] for n in graph.nodes])
-        county_response['num_counties'] = len(counties)
-        try:
-            county_partition = GeographicPartition(graph, county_column,
-                                                   {"population": updaters.Tally('TOTPOP', alias="population")})
-            county_pop_dict = {c: county_partition.population[c] for c in counties}
-            county_response['population'] = county_pop_dict
-        except KeyError:
-            county_response['population'] = -1
-        split_list = {}
-        splits = 0
-        num_split = 0
-        for c in counties:
-            s = county_splits[c].contains
-            # this is caused by a bug in some states in gerrychain I think
-            if -1 in s:
-                s.remove(-1)
-            if len(s) > 1:
-                num_split += 1
-                split_list[c] = list(s)
-                splits += len(s) - 1
-        county_response['splits'] = splits
-        county_response['split_list'] = split_list
+        county_response = county_split_info(graph, partition, county_pops)
     except:
         county_response = -1
 
-    # municipality splits
-    try:
-        municipality_splits = updaters.county_splits("muni_splits", municipality_column)(partition)
-        muni_response = {}
-        munis = set([graph.nodes[n][municipality_column] for n in graph.nodes])
-        muni_response['num_counties'] = len(munis)
-        try:
-            muni_partition = GeographicPartition(graph, municipality_column,
-                             {"population": updaters.Tally('TOTPOP', alias="population")})
-            muni_pop_dict = {m: muni_partition.population[m] for m in munis}
-            muni_response['population'] = muni_pop_dict
-            muni_response['num_counties'] = len(munis)
-        except KeyError:
-            muni_response['population'] = -1
-        split_list = {}
-        splits = 0
-        num_split = 0
-        for m in munis:
-            s = municipality_splits[m].contains
-            # this is caused by a bug in some states in gerrychain I think
-            if -1 in s:
-                s.remove(-1)
-            if len(s) > 1:
-                num_split += 1
-                split_list[m] = list(s)
-                splits += len(s) - 1
-        muni_response['splits'] = splits
-        muni_response['split_list'] = split_list
-    except:
-        muni_response = -1
+    if elections != None:
+        partisanship_metrics = partisan_metrics(partition, elections, county_pops)
+    else:
+        partisanship_metrics = "Partisanship Metrics unavailable for this geometry."
+
 
     # Build Response dictionary
     response = {
@@ -112,7 +47,7 @@ def plan_evaluation(partition):
         'pp_scores': polsbypopper,
         'num_units': len(graph.nodes),
         'counties': county_response,
-        'municipalities': muni_response
+        'partisanship': partisanship_metrics
     }
     return response
 
@@ -123,19 +58,19 @@ def lambda_handler(event, context):
     state = event["state"].lower().replace(" ", "_")
     units = event["units"].lower().replace(" ", "")
     # district = event["dist_id"]
+    elections = None
     plan_assignment = event["assignment"]
-    keys = set(plan_assignment.keys())
     key = "dual_graphs/{}_{}.json".format(state, units)
+    with open("resources/county_totpop_2020.json") as fin:
+        county_pops = json.load(fin)[state]
 
     try:
         data = s3.get_object(Bucket=bucket, Key=key)
         g = json_graph.adjacency_graph(json.load(data['Body']))
         graph = Graph(g)
-        assignment = {n: plan_assignment[n] if n in keys else -1 for n in graph.nodes()}
-        part = GeographicPartition(graph, assignment)
         return {
             'statusCode': 200,
-            'body': json.dumps(plan_evaluation(part))
+            'body': json.dumps(plan_evaluation(graph, plan_assignment, county_pops, elections))
         }
     
     except Exception as e:
