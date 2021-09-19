@@ -30,7 +30,7 @@ def lambda_handler(event, context):
         
         ctr_data = s3.get_object(Bucket=bucket, Key=centroid_key)
         unit_centroids = pd.read_csv(ctr_data['Body'], dtype={"GEOID": str}).set_index("GEOID")
-        coords = unit_centroids.loc[largest_segment_ids]
+        coords = unit_centroids.loc[unit_centroids.index.intersection(set(largest_segment_ids))]
         
 
         return {
