@@ -1,0 +1,106 @@
+{
+    "cvap_col": {"2008": "CVAP14", "2013": "CVAP14", "2014": "CVAP14", "2016": "CVAP16",
+                 "2017": "CVAP17", "2018": "CVAP18"},
+    "vap_col": {"2008": "VAP20", "2013": "VAP20", "2014": "VAP20", "2016": "VAP20", "2017": "VAP20",
+                "2018": "VAP20"},
+    "pop_col": "TOTPOP20",
+    "groups": {
+        "Black": {
+            "cvap_col": {"2008": "BCVAP14", "2013": "BCVAP14", "2014": "BCVAP14", "2016": "BCVAP16",
+                         "2017": "BCVAP17", "2018": "BCVAP18"},
+            "vap_col": {"2008": "BVAP20", "2013": "BVAP20", "2014": "BVAP20", "2016": "BVAP20",
+                        "2017": "BVAP20", "2018": "BVAP20"},
+            "logit_params": null
+        },
+        "Hispanic": {
+            "cvap_col": {"2008": "HCVAP14", "2013": "HCVAP14", "2014": "HCVAP14", "2016": "HCVAP16",
+                         "2017": "HCVAP17", "2018": "HCVAP18"},
+            "vap_col": {"2008": "HVAP20", "2013": "HVAP20", "2014": "HVAP20", "2016": "HVAP20",
+                        "2017": "HVAP20", "2018": "HVAP20"},
+            "logit_params": null
+        }
+    },
+    "local_elections": [
+        {
+            "name": "CONG18",
+            "year": 2018,
+            "cands": ["USH18P_7_APressley", "USH18P_7_MCapuano"],
+            "coc": {
+                "Black": "USH18P_7_APressley",
+                "Hispanic": "USH18P_7_APressley"
+            }
+        },
+        {
+            "name": "BMAY17",
+            "year": 2017,
+            "cands": ["BOSMAY17G_TJackson", "BOSMAY17G_MWalsh"],
+            "coc": {
+                "Black": "BOSMAY17G_TJackson",
+                "Hispanic": "BOSMAY17G_TJackson"
+            }
+        },
+        {
+            "name": "SS08",
+            "year": 2008,
+            "cands": ["SS08P_Suff2_SChangDiaz", "SS08P_Suff2_DWilkerson"],
+            "coc": {
+                "Black": "SS08P_Suff2_DWilkerson",
+                "Hispanic": "SS08P_Suff2_DWilkerson"
+            }
+        },
+        {
+            "name": "SS13",
+            "year": 2013,
+            "cands": ["SS13P_Suff1_LForry", "SS13P_Suff1_NCollins"],
+            "coc": {
+                "Black": "SS13P_Suff1_LForry",
+                "Hispanic": "SS13P_Suff1_LForry"
+            }
+        },
+        {
+            "name": "SH18",
+            "year": 2018,
+            "cands": ["SH18P_Suff11_EMalia", "SH18P_Suff11_CClemons"],
+            "coc": {
+                "Black": "SH18P_Suff11_CClemons",
+                "Hispanic": "SH18P_Suff11_CClemons"
+            }
+        },
+        {
+            "name": "SH18",
+            "year": 2018,
+            "cands": ["SH18P_Suff12_DCullinane", "SH18P_Suff12_JLacet"],
+            "coc": {
+                "Black": "SH18P_Suff12_JLacet",
+                "Hispanic": "SH18P_Suff12_JLacet"
+            }
+        },
+        {
+            "name": "SH18",
+            "year": 2018,
+            "cands": ["SH18P_Suff14_AScaccia", "SH18P_Suff14_SIdowu"],
+            "coc": {
+                "Black": "SH18P_Suff14_SIdowu",
+                "Hispanic": "SH18P_Suff14_SIdowu"
+            }
+        },
+        {
+            "name": "SH16",
+            "year": 2016,
+            "cands": ["SH16P_Suff11_EMalia", "SH16P_Suff11_CClemons"],
+            "coc": {
+                "Black": "SH16P_Suff11_CClemons",
+                "Hispanic": "SH16P_Suff11_CClemons"
+            }
+        },
+        {
+            "name": "SH16",
+            "year": 2016,
+            "cands": ["SH16P_Suff12_DCullinane", "SH16P_Suff12_JLacet"],
+            "coc": {
+                "Black": "SH16P_Suff12_JLacet",
+                "Hispanic": "SH16P_Suff12_JLacet"
+            }
+        }
+    ]
+}
