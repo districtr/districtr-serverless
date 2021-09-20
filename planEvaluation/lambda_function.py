@@ -1,6 +1,6 @@
 import json
 from networkx.readwrite import json_graph
-from gerrychain import Graph, GeographicPartition
+from gerrychain import Graph, GeographicPartition, Election
 
 from plan_metrics import *
 import boto3
@@ -10,10 +10,15 @@ def plan_evaluation(graph, districtr_assignment, county_pops, elections):
     keys = set(districtr_assignment.keys())
     parts = set(districtr_assignment.values())
     assignment = {n: districtr_assignment[n] if n in keys else -1 for n in graph.nodes()}
-    partition = GeographicPartition(graph, assignment)
+    election_names = [e["name"] for e in elections]
+    election_updaters = {e["name"]: Election(e["name"], {c["name"]: c["key"] 
+                                                         for c in e["candidates"]})
+                         for e in elections}
+    
+    partition = GeographicPartition(graph, assignment, election_updaters)
 
     # Contiguity
-    split_districts = [part for part in parts if district_contiguity([n for n, p in districtr_assignment.items() if p == part], graph)]
+    split_districts = [part for part in parts if not district_contiguity([n for n, p in districtr_assignment.items() if p == part], graph)]
     contiguity = (split_districts == [])
 
     # Calculate cut edges
@@ -32,8 +37,8 @@ def plan_evaluation(graph, districtr_assignment, county_pops, elections):
     except:
         county_response = -1
 
-    if elections != None:
-        partisanship_metrics = partisan_metrics(partition, elections, county_pops)
+    if len(elections) > 0:
+        partisanship_metrics = partisan_metrics(partition, election_names, county_pops)
     else:
         partisanship_metrics = "Partisanship Metrics unavailable for this geometry."
 
@@ -58,7 +63,10 @@ def lambda_handler(event, context):
     state = event["state"].lower().replace(" ", "_")
     units = event["units"].lower().replace(" ", "")
     # district = event["dist_id"]
-    elections = None
+    try:
+        elections = event["elections"]
+    except:
+        elections = []
     plan_assignment = event["assignment"]
     key = "dual_graphs/{}_{}.json".format(state, units)
     with open("resources/county_totpop_2020.json") as fin:
