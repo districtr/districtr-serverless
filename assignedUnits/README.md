@@ -1,6 +1,6 @@
-# unassignedUnits
+# assignedUnits
 
-Given a plan assignment key list, return the largest network-connected block of unassigned units as a lat/lng bounding box
+Given a plan assignment key list, return the lat/lng bounding box around their centroids
 
 ## Subfolders / Scripts
 
@@ -8,11 +8,8 @@ Given a plan assignment key list, return the largest network-connected block of 
 
 ## Dependencies
 * Lambda Layers
-    * Graphs v1
     * Data Wrangling v1
 * Resources:
-    * Json dualgraph objects in `s3://districtr/dual_graphs`.  Node ids should match districtr unit
-      id column.  Only node ids and adjacencies are needed.
     * District centroids in `s3://districtr/centroids`
 
 ### What places/units are supported

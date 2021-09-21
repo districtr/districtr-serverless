@@ -1,0 +1,50 @@
+{
+    "cvap_col": {"2008": "CVAP14", "2013": "CVAP14", "2014": "CVAP14", "2016": "CVAP16",
+                 "2017": "CVAP17", "2018": "CVAP18"},
+    "vap_col": {"2008": "VAP20", "2013": "VAP20", "2014": "VAP20", "2016": "VAP20", "2017": "VAP20",
+                "2018": "VAP20"},
+    "pop_col": "TOTPOP20",
+    "groups": {
+        "Hispanic": {
+            "cvap_col": {"2008": "HCVAP14", "2013": "HCVAP14", "2014": "HCVAP14", "2016": "HCVAP16",
+                         "2017": "HCVAP17", "2018": "HCVAP18"},
+            "vap_col": {"2008": "HVAP20", "2013": "HVAP20", "2014": "HVAP20", "2016": "HVAP20",
+                        "2017": "HVAP20", "2018": "HVAP20"},
+            "logit_params": null
+        },
+        "White": {
+            "cvap_col": {"2008": "WCVAP14", "2013": "WCVAP14", "2014": "WCVAP14", "2016": "WCVAP16",
+                         "2017": "WCVAP17", "2018": "WCVAP18"},
+            "vap_col": {"2008": "WVAP20", "2013": "WVAP20", "2014": "WVAP20", "2016": "WVAP20",
+                        "2017": "WVAP20", "2018": "WVAP20"},
+            "logit_params": null
+        }
+    },
+    "local_elections": [
+        {
+            "name": "CONG18",
+            "year": 2018,
+            "cands": ["USH18P_3_LTrahan", "USH18P_3_DKoh", "USH18P_3_BLitalien", "USH18P_3_JMatias",
+                      "USH18P_3_RGifford", "USH18P_3_AChandler"],
+            "coc": {
+                "Hispanic": "USH18P_3_JMatias"
+            }
+        },
+        {
+            "name": "SS18",
+            "year": 2018,
+            "cands": ["SS18P_EssMidd2_BFinegold", "SS18P_EssMidd2_MArmano", "SS18P_EssMidd2_PPayano"],
+            "coc": {
+                "Hispanic": "SS18P_EssMidd2_PPayano"
+            }
+        },
+        {
+            "name": "SS14",
+            "year": 2014,
+            "cands": ["SS14P_EssMidd2_BLitalien", "SS14P_EssMidd2_PPayano",  "SS14P_EssMidd2_DRodriguez"],
+            "coc": {
+                "Hispanic": "SS14P_EssMidd2_PPayano"
+            }
+        }
+    ]
+}
