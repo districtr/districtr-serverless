@@ -41,7 +41,7 @@
         {
             "name": "SS14",
             "year": 2014,
-            "cands": ["SS14P_EssMidd2_BLitalien", "SS14P_EssMidd2_PPayano"],
+            "cands": ["SS14P_EssMidd2_BLitalien", "SS14P_EssMidd2_PPayano",  "SS14P_EssMidd2_DRodriguez"],
             "coc": {
                 "Hispanic": "SS14P_EssMidd2_PPayano"
             }

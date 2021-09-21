@@ -28,7 +28,7 @@ def get_district_details(dist_asignment, group, state_details, ei_data, other_co
         outside_elect_terrain_non_group_vap = outside_elect_terrain_total_vap - sum(outside_elect_terrain_group_vaps)
 
 
-        outside_elect_terrain_vap_by_group = zip(ei_groups, outside_elect_terrain_group_vaps)
+        outside_elect_terrain_vap_by_group = list(zip(ei_groups, outside_elect_terrain_group_vaps))
 
         coc_proj_vote = sum([ei_data[coc][group] * outside_elect_terrain_group_vap 
                             for (group,outside_elect_terrain_group_vap) in outside_elect_terrain_vap_by_group]) \
