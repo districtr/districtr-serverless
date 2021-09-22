@@ -10,7 +10,7 @@ class PlanMetrics:
         self.graph = part.graph
         self.county_column = county_col
         self.municipality_column = municipality_col
-        self.county_pop = county_pops
+        self.county_pops = county_pops
         self.elections = elections
 
 
@@ -86,7 +86,7 @@ class PlanMetrics:
         muni_response['split_list'] = split_list
         return muni_response
 
-    def eugia_metric(self, e, party):
+    def eguia_metric(self, e, party):
         seat_share = self.part[e].seats(party) / len(self.part.parts)
         county_part = GeographicPartition(self.graph, self.county_column, self.part.updaters)
         counties = county_part.parts
@@ -111,7 +111,7 @@ class PlanMetrics:
             * # Swing districts
             * # Competitive districts
         """
-        party = self.part[self.elections[0]].parties[0]
+        party = self.part[self.elections[0]].election.parties[0]
 
         ## Plan wide scores
         election_results = np.array([np.array(self.part[e].percents(party)) for e in self.elections])
@@ -119,12 +119,12 @@ class PlanMetrics:
         election_stability = (election_results > 0.5).sum(axis=0)
         num_swing_districts = np.logical_and(election_stability != 0, election_stability != len(self.elections)).sum()
 
-        response = {"election_scores": {e.name: {
+        response = {"election_scores": {self.part[e].election.name: {
                                                     "seats": self.part[e].seats(party),
                                                     "efficiency_gap": self.part[e].efficiency_gap(),
                                                     "mean_median": self.part[e].mean_median(),
                                                     "partisan_bias": self.part[e].partisan_bias(),
-                                                    "eugia_county": self.eugia_metric(e, party)
+                                                    "eguia_county": self.eguia_metric(e, party)
                                                 } for e in self.elections},
                     "plan_scores": {
                                         "num_swing_districts": int(num_swing_districts),

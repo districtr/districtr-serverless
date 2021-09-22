@@ -13,7 +13,7 @@ def plan_evaluation(graph, districtr_assignment, county_pops, elections):
     ## sort candidates alphabetically so that the "first" party is consistent.
     election_updaters = {e["name"]: Election(e["name"], {c["name"]: c["key"] 
                                                          for c in sorted(e["candidates"], 
-                                                                         lambda c: c["name"])})
+                                                                         key=lambda c: c["name"])})
                          for e in elections}
     
     partition = GeographicPartition(graph, assignment, election_updaters)
