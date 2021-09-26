@@ -4,7 +4,7 @@ Given a district plan id, generate a png thumbnail and update it's record in the
 
 ## Subfolders  / Scripts
 
-* `/lambda_function`: code for AWS Lambda function districtCenter. (described above)
+* `/lambda_function`: code for AWS Lambda function. (described above)
 
 ## Dependencies
 * Lambda Layers
