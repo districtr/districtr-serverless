@@ -79,11 +79,6 @@ def lambda_handler(event, context):
         data = s3.get_object(Bucket=bucket, Key=key)
         geometries = gpd.read_file(data["Body"])
 
-        # if place_id == 'pennsylvania':
-        #     geometries = geometries.to_crs(epsg=26918)
-        # elif place_id == 'michigan_blockgroups':
-        #     geometries = geometries.to_crs(epsg=6493)
-
         geometries['color'] = geometries.apply(lambda row: coloration(row, id_column_key, assignment), axis=1)
         geoplt = geometries.plot(figsize=(2.8, 2.8), color=geometries['color'])
 
@@ -98,13 +93,14 @@ def lambda_handler(event, context):
 
         pic_IObytes = io.BytesIO()
         geoplt.figure.savefig(pic_IObytes, format='png')
-        pic_IObytes.seek(0)
-        
-        pic_hash = str(base64.b64encode(pic_IObytes.read()))
-        mdb.plans.update_one({ 'simple_id': int(origin) }, { '$set': { 'screenshot2': 'data:image/png;base64,' + pic_hash[2:-1] } })
         
         #pic_IObytes.seek(0)
-        #s3.put_object(Bucket="districtr-exports", Key=str(origin), ContentType='image/png', Body=pic_IObytes)
+        #pic_hash = str(base64.b64encode(pic_IObytes.read()))
+        #mdb.plans.update_one({ 'simple_id': int(origin) }, { '$set': { 'screenshot2': 'data:image/png;base64,' + pic_hash[2:-1] } })
+        
+        pic_IObytes.seek(0)
+        s3.put_object(Bucket="districtr-public", Key=str(origin) + ".png", ContentType='image/png', Body=pic_IObytes)
+        mdb.plans.update_one({ 'simple_id': int(origin) }, { '$set': { 'screenshot2': 'https://districtr-public.s3.us-east-1.amazonaws.com/' + str(origin) + '.png' } })
 
         plt.close(geoplt.figure)
 
