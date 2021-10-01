@@ -14,7 +14,7 @@ mdb = client.test
 def lambda_handler(event, context):
     id = int(event["queryStringParameters"]["simple_id"])
     fname = str(id) + '.png'
-    plan = mdb.plans.find_one({ 'simple_id': id })
+    plan = mdb.plans.find_one({ 'simple_id': id }, { 'simple_id': 1, 'screenshot2': 1 })
     result = 'no screenshot'
     
     if (plan is not None)  and ('screenshot2' in plan):
