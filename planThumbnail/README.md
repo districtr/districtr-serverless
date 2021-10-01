@@ -1,6 +1,8 @@
 # planThumbnail
 
-Given a district plan id, generate a png thumbnail and update it's record in the database.
+Given a district plan id, generate a png thumbnail and update its record in the database.
+
+Requires **lambda-plus-write** role to post to districtr-public bucket
 
 ## Subfolders  / Scripts
 
