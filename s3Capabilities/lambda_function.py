@@ -1,11 +1,12 @@
 # return JSON description on whether S3 has files to calculate number markers, contiguity, and shapefile export
 import boto3
+import json
 
 s3 = boto3.client('s3')
 
 def lambda_handler(event, context):
-    if 'body' in event.keys():
-        event = json.loads(event["body"])
+    event = json.loads(event["body"])
+    
     state = event["state"].lower().replace(" ", "_")
     units = event["units"].lower().replace(" ", "")
     
@@ -19,14 +20,14 @@ def lambda_handler(event, context):
         has_centroid = False
 
     try:
-        key = "dual_graphs/{}_{}.csv".format(state, units)
+        key = "dual_graphs/{}_{}.json".format(state, units)
         s3.head_object(Bucket=bucket, Key=key)
         has_graph = True
     except Exception as e:
         has_graph = False
 
     try:
-        key = "shapefiles/{}_{}.csv".format(state, units)
+        key = "shapefiles/{}_{}.shp".format(state, units)
         s3.head_object(Bucket=bucket, Key=key)
         has_shp = True
     except Exception as e:
